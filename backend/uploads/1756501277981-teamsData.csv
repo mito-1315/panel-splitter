@@ -1,0 +1,239 @@
+teamId,teamName,problemStatementId,theme
+TID_5829,Quantum Innovators,25018,MedTech / BioTech / HealthTech
+TID_8314,Logic Ninjas,25063,Disaster Management
+TID_1947,Future Wizards,25041,MedTech / BioTech / HealthTech
+TID_6281,Data Crusaders,25023,MedTech / BioTech / HealthTech
+TID_9015,Pixel Hackers,25073,Fitness & Sports
+TID_3378,Cyber Pioneers,25004,Agriculture, FoodTech & Rural Development
+TID_4821,Global Dreamers,25053,Agriculture, FoodTech & Rural Development
+TID_7759,Nano Solutions,25011,Smart Education
+TID_2093,Code Dynamics,25064,Renewable / Sustainable Energy
+TID_5160,United Synergy,25035,Smart Education
+TID_8842,Quantum Ninjas,25020,Smart Automation
+TID_1234,Logic Hackers,25083,MedTech / BioTech / HealthTech
+TID_9573,Future Innovators,25049,MedTech / BioTech / HealthTech
+TID_6428,Data Pioneers,25071,Disaster Management
+TID_2819,Pixel Dreamers,25015,Agriculture, FoodTech & Rural Development
+TID_7301,Cyber Crusaders,25060,Clean & Green Technology
+TID_4055,Global Solutions,25008,Disaster Management
+TID_1687,Nano Dynamics,25038,Smart Education
+TID_8110,Code Synergy,25028,Smart Education
+TID_5396,United Wizards,25055,Miscellaneous
+TID_3724,Quantum Hackers,25081,Smart Automation
+TID_6079,Logic Innovators,25025,MedTech / BioTech / HealthTech
+TID_2502,Future Pioneers,25046,Smart Automation
+TID_9861,Data Dreamers,25076,Agriculture, FoodTech & Rural Development
+TID_4435,Pixel Crusaders,25001,MedTech / BioTech / HealthTech
+TID_1198,Cyber Solutions,25066,Smart Automation
+TID_7654,Global Dynamics,25031,Agriculture, FoodTech & Rural Development
+TID_3982,Nano Synergy,25058,Miscellaneous
+TID_8520,Code Wizards,25013,Transportation & Logistics
+TID_5708,United Ninjas,25079,Disaster Management
+TID_1043,Quantum Innovators,25034,Agriculture, FoodTech & Rural Development
+TID_6891,Logic Pioneers,25002,Travel & Tourism
+TID_3276,Future Dreamers,25069,Miscellaneous
+TID_9157,Data Crusaders,25022,Transportation & Logistics
+TID_4780,Pixel Solutions,25045,Smart Automation
+TID_2313,Cyber Dynamics,25080,Smart Automation
+TID_7066,Global Synergy,25010,Agriculture, FoodTech & Rural Development
+TID_5549,Nano Wizards,25037,Smart Education
+TID_8632,Code Ninjas,25059,Miscellaneous
+TID_1475,United Hackers,25019,Smart Education
+TID_9321,Quantum Pioneers,25062,Agriculture, FoodTech & Rural Development
+TID_3607,Logic Dreamers,25005,Agriculture, FoodTech & Rural Development
+TID_6950,Future Crusaders,25029,Smart Education
+TID_2188,Data Solutions,25052,Heritage & Culture
+TID_7412,Pixel Dynamics,25077,Smart Automation
+TID_4264,Cyber Synergy,25016,Smart Education
+TID_1839,Global Wizards,25042,MedTech / BioTech / HealthTech
+TID_8003,Nano Ninjas,25067,Miscellaneous
+TID_5227,Code Hackers,25032,Agriculture, FoodTech & Rural Development
+TID_3516,United Innovators,25003,Transportation & Logistics
+TID_9785,Quantum Dreamers,25050,Transportation & Logistics
+TID_6641,Logic Crusaders,25074,Agriculture, FoodTech & Rural Development
+TID_2930,Future Solutions,25012,Smart Education
+TID_7894,Data Dynamics,25039,Smart Education
+TID_4577,Pixel Synergy,25065,Smart Automation
+TID_1352,Cyber Wizards,25026,MedTech / BioTech / HealthTech
+TID_8769,Global Ninjas,25048,Robotics and Drones
+TID_5918,Nano Hackers,25006,Agriculture, FoodTech & Rural Development
+TID_3143,Code Innovators,25070,Miscellaneous
+TID_9406,United Pioneers,25033,Agriculture, FoodTech & Rural Development
+TID_6370,Quantum Crusaders,25056,Miscellaneous
+TID_2659,Logic Solutions,25017,Smart Education
+TID_7233,Future Dynamics,25043,MedTech / BioTech / HealthTech
+TID_4986,Data Synergy,25068,Miscellaneous
+TID_1504,Pixel Wizards,25009,Smart Education
+TID_8251,Cyber Ninjas,25036,Smart Education
+TID_5675,Global Hackers,25057,Miscellaneous
+TID_3899,Nano Innovators,25021,Transportation & Logistics
+TID_9214,Code Pioneers,25047,Robotics and Drones
+TID_6125,United Dreamers,25072,Renewable / Sustainable Energy
+TID_2467,Quantum Solutions,25014,Clean & Green Technology
+TID_7582,Logic Dynamics,25040,Smart Education
+TID_4109,Future Synergy,25061,Travel & Tourism
+TID_1763,Data Wizards,25024,MedTech / BioTech / HealthTech
+TID_8438,Pixel Ninjas,25051,Renewable / Sustainable Energy
+TID_5021,Cyber Hackers,25007,Agriculture, FoodTech & Rural Development
+TID_3305,Global Innovators,25030,Agriculture, FoodTech & Rural Development
+TID_9697,Nano Pioneers,25054,Smart Automation
+TID_6553,Code Dreamers,25078,Miscellaneous
+TID_2742,United Crusaders,25027,Blockchain & Cybersecurity
+TID_7976,Quantum Dynamics,25044,MedTech / BioTech / HealthTech
+TID_4320,Logic Synergy,25075,Agriculture, FoodTech & Rural Development
+TID_1991,Future Wizards,25001,MedTech / BioTech / HealthTech
+TID_8688,Data Ninjas,25038,Smart Education
+TID_5874,Pixel Hackers,25063,Disaster Management
+TID_3037,Cyber Innovators,25020,Smart Automation
+TID_9083,Global Pioneers,25049,MedTech / BioTech / HealthTech
+TID_6712,Nano Dreamers,25071,Disaster Management
+TID_2256,Code Crusaders,25015,Agriculture, FoodTech & Rural Development
+TID_7140,United Solutions,25060,Clean & Green Technology
+TID_4623,Quantum Wizards,25008,Disaster Management
+TID_1381,Logic Ninjas,25035,Smart Education
+TID_8907,Future Hackers,25055,Miscellaneous
+TID_5465,Data Innovators,25081,Smart Automation
+TID_3658,Pixel Pioneers,25025,MedTech / BioTech / HealthTech
+TID_9929,Cyber Dreamers,25046,Smart Automation
+TID_6817,Global Crusaders,25076,Agriculture, FoodTech & Rural Development
+TID_2045,Nano Solutions,25002,Travel & Tourism
+TID_7334,Code Dynamics,25069,Miscellaneous
+TID_4871,United Synergy,25022,Transportation & Logistics
+TID_1128,Quantum Ninjas,25045,Smart Automation
+TID_8593,Logic Hackers,25080,Smart Automation
+TID_5286,Future Innovators,25010,Agriculture, FoodTech & Rural Development
+TID_3409,Data Pioneers,25037,Smart Education
+TID_9752,Pixel Dreamers,25059,Miscellaneous
+TID_6170,Cyber Crusaders,25019,Smart Education
+TID_2698,Global Solutions,25062,Agriculture, FoodTech & Rural Development
+TID_7781,Nano Dynamics,25005,Agriculture, FoodTech & Rural Development
+TID_4514,Code Synergy,25029,Smart Education
+TID_1267,United Wizards,25052,Heritage & Culture
+TID_8030,Quantum Hackers,25077,Smart Automation
+TID_5604,Logic Innovators,25016,Smart Education
+TID_3791,Future Pioneers,25042,MedTech / BioTech / HealthTech
+TID_9543,Data Dreamers,25067,Miscellaneous
+TID_6236,Pixel Crusaders,25032,Agriculture, FoodTech & Rural Development
+TID_2865,Cyber Solutions,25003,Transportation & Logistics
+TID_7919,Global Dynamics,25050,Transportation & Logistics
+TID_4088,Nano Synergy,25074,Agriculture, FoodTech & Rural Development
+TID_1611,Code Wizards,25012,Smart Education
+TID_8366,United Ninjas,25039,Smart Education
+TID_5139,Quantum Innovators,25065,Smart Automation
+TID_3922,Logic Pioneers,25026,MedTech / BioTech / HealthTech
+TID_9815,Future Dreamers,25048,Robotics and Drones
+TID_6499,Data Crusaders,25006,Agriculture, FoodTech & Rural Development
+TID_2347,Pixel Solutions,25070,Miscellaneous
+TID_7000,Cyber Dynamics,25033,Agriculture, FoodTech & Rural Development
+TID_4733,Global Synergy,25056,Miscellaneous
+TID_1076,Nano Wizards,25017,Smart Education
+TID_8802,Code Ninjas,25043,MedTech / BioTech / HealthTech
+TID_5578,United Hackers,25068,Miscellaneous
+TID_3211,Quantum Pioneers,25009,Smart Education
+TID_9474,Logic Dreamers,25036,Smart Education
+TID_6038,Future Crusaders,25057,Miscellaneous
+TID_2561,Data Solutions,25021,Transportation & Logistics
+TID_7625,Pixel Dynamics,25047,Robotics and Drones
+TID_4192,Cyber Synergy,25072,Renewable / Sustainable Energy
+TID_1856,Global Wizards,25014,Clean & Green Technology
+TID_8173,Nano Ninjas,25040,Smart Education
+TID_5350,Code Hackers,25061,Travel & Tourism
+TID_3084,United Innovators,25024,MedTech / BioTech / HealthTech
+TID_9646,Quantum Dreamers,25051,Renewable / Sustainable Energy
+TID_6909,Logic Crusaders,25007,Agriculture, FoodTech & Rural Development
+TID_2137,Future Solutions,25030,Agriculture, FoodTech & Rural Development
+TID_7460,Data Dynamics,25054,Smart Automation
+TID_4393,Pixel Synergy,25078,Miscellaneous
+TID_1729,Cyber Wizards,25027,Blockchain & Cybersecurity
+TID_8286,Global Ninjas,25044,MedTech / BioTech / HealthTech
+TID_5952,Nano Hackers,25075,Agriculture, FoodTech & Rural Development
+TID_3575,Code Innovators,25018,MedTech / BioTech / HealthTech
+TID_9111,United Pioneers,25063,Disaster Management
+TID_6337,Quantum Crusaders,25023,MedTech / BioTech / HealthTech
+TID_2780,Logic Solutions,25073,Fitness & Sports
+TID_7824,Future Dynamics,25004,Agriculture, FoodTech & Rural Development
+TID_4458,Data Synergy,25053,Agriculture, FoodTech & Rural Development
+TID_1583,Pixel Wizards,25011,Smart Education
+TID_8057,Cyber Ninjas,25064,Renewable / Sustainable Energy
+TID_5731,Global Hackers,25031,Agriculture, FoodTech & Rural Development
+TID_3166,Nano Innovators,25058,Miscellaneous
+TID_9369,Code Pioneers,25013,Transportation & Logistics
+TID_6682,United Dreamers,25079,Disaster Management
+TID_2995,Quantum Solutions,25034,Agriculture, FoodTech & Rural Development
+TID_7258,Logic Dynamics,25001,MedTech / BioTech / HealthTech
+TID_4911,Future Synergy,25066,Smart Automation
+TID_1434,Data Wizards,25038,Smart Education
+TID_8727,Pixel Ninjas,25059,Miscellaneous
+TID_5090,Cyber Hackers,25019,Smart Education
+TID_3853,Global Innovators,25062,Agriculture, FoodTech & Rural Development
+TID_9505,Nano Pioneers,25005,Agriculture, FoodTech & Rural Development
+TID_6589,Code Dreamers,25029,Smart Education
+TID_2828,United Crusaders,25052,Heritage & Culture
+TID_7181,Quantum Dynamics,25077,Smart Automation
+TID_4654,Logic Synergy,25016,Smart Education
+TID_1917,Future Wizards,25042,MedTech / BioTech / HealthTech
+TID_8480,Data Ninjas,25067,Miscellaneous
+TID_5643,Pixel Hackers,25032,Agriculture, FoodTech & Rural Development
+TID_3268,Cyber Innovators,25003,Transportation & Logistics
+TID_9024,Global Pioneers,25050,Transportation & Logistics
+TID_6755,Nano Dreamers,25074,Agriculture, FoodTech & Rural Development
+TID_2299,Code Crusaders,25012,Smart Education
+TID_7093,United Solutions,25039,Smart Education
+TID_4356,Quantum Wizards,25065,Smart Automation
+TID_1649,Logic Ninjas,25026,MedTech / BioTech / HealthTech
+TID_8975,Future Hackers,25048,Robotics and Drones
+TID_5318,Data Innovators,25006,Agriculture, FoodTech & Rural Development
+TID_3441,Pixel Pioneers,25070,Miscellaneous
+TID_9710,Cyber Dreamers,25033,Agriculture, FoodTech & Rural Development
+TID_6138,Global Crusaders,25056,Miscellaneous
+TID_2627,Nano Solutions,25017,Smart Education
+TID_7710,Code Dynamics,25043,MedTech / BioTech / HealthTech
+TID_4243,United Synergy,25068,Miscellaneous
+TID_1807,Quantum Ninjas,25009,Smart Education
+TID_8552,Logic Hackers,25036,Smart Education
+TID_5837,Future Innovators,25057,Miscellaneous
+TID_3960,Data Pioneers,25021,Transportation & Logistics
+TID_9602,Pixel Dreamers,25047,Robotics and Drones
+TID_6305,Cyber Crusaders,25072,Renewable / Sustainable Energy
+TID_2534,Global Solutions,25014,Clean & Green Technology
+TID_7508,Nano Dynamics,25040,Smart Education
+TID_4031,Code Synergy,25061,Travel & Tourism
+TID_1555,United Wizards,25024,MedTech / BioTech / HealthTech
+TID_8329,Quantum Hackers,25051,Renewable / Sustainable Energy
+TID_5002,Logic Innovators,25007,Agriculture, FoodTech & Rural Development
+TID_3686,Future Pioneers,25030,Agriculture, FoodTech & Rural Development
+TID_9278,Data Dreamers,25054,Smart Automation
+TID_6861,Pixel Crusaders,25078,Miscellaneous
+TID_2100,Cyber Solutions,25027,Blockchain & Cybersecurity
+TID_7424,Global Dynamics,25044,MedTech / BioTech / HealthTech
+TID_4957,Nano Synergy,25075,Agriculture, FoodTech & Rural Development
+TID_1311,Code Wizards,25018,MedTech / BioTech / HealthTech
+TID_8614,United Ninjas,25063,Disaster Management
+TID_5488,Quantum Innovators,25023,MedTech / BioTech / HealthTech
+TID_3012,Logic Pioneers,25073,Fitness & Sports
+TID_9184,Future Dreamers,25004,Agriculture, FoodTech & Rural Development
+TID_6007,Data Crusaders,25053,Agriculture, FoodTech & Rural Development
+TID_2436,Pixel Solutions,25011,Smart Education
+TID_7369,Cyber Dynamics,25064,Renewable / Sustainable Energy
+TID_4802,Global Synergy,25031,Agriculture, FoodTech & Rural Development
+TID_1165,Nano Wizards,25058,Miscellaneous
+TID_8880,Code Ninjas,25013,Transportation & Logistics
+TID_5254,United Hackers,25079,Disaster Management
+TID_3537,Quantum Pioneers,25034,Agriculture, FoodTech & Rural Development
+TID_9999,Logic Dreamers,25002,Travel & Tourism
+TID_6613,Future Crusaders,25069,Miscellaneous
+TID_2964,Data Solutions,25022,Transportation & Logistics
+TID_7858,Pixel Dynamics,25045,Smart Automation
+TID_4591,Cyber Synergy,25080,Smart Automation
+TID_1224,Global Wizards,25010,Agriculture, FoodTech & Rural Development
+TID_8087,Nano Ninjas,25037,Smart Education
+TID_5761,Code Hackers,25059,Miscellaneous
+TID_3340,United Innovators,25019,Smart Education
+TID_9233,Quantum Dreamers,25062,Agriculture, FoodTech & Rural Development
+TID_6526,Logic Crusaders,25005,Agriculture, FoodTech & Rural Development
+TID_2069,Future Solutions,25029,Smart Education
+TID_7683,Data Dynamics,25052,Heritage & Culture
+TID_4150,Pixel Synergy,25077,Smart Automation
+TID_1784,Cyber Wizards,25016,Smart Education
+TID_8419,Global Ninjas,25042,MedTech / BioTech / HealthTech
+TID_5192,Nano Hackers,25067,Miscellaneous
