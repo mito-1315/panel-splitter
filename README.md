@@ -6,6 +6,9 @@ Extracts pairs of Problem Statement ID and Theme from `data.html` and writes the
 - Node.js 16+ installed
 
 ### Input Files
+
+-`data.html` : To get this file, navigate to "https://sih.gov.in/sih2025PS" -> inspect -> source -> lib -> sih2025PS
+
 - `data.html`: HTML containing repeated table structures where:
   - The `<td>` immediately following a `<th>` with text `Problem Statement ID` contains a number (possibly wrapped in a `<div>` or braces like `{Number : 25001}`).
   - The `<td>` immediately following a `<th>` with text `Theme` contains the theme (e.g., `{Theme : MedTech / BioTech / HealthTech}`).
