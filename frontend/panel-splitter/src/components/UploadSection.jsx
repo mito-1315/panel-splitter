@@ -27,8 +27,28 @@ export const UploadSection = () => {
     try {
       const text = await file.text();
       const ok = validateCsv(text);
-      setStatus(ok ? 'success' : 'error');
+      
+      if (ok) {
+        // Create a FormData object to send the file to the backend
+        const formData = new FormData();
+        formData.append('file', file);
+        
+        // Make a POST request to the backend at port 5000
+        const response = await fetch('http://localhost:5000/upload', {
+          method: 'POST',
+          body: formData,
+        });
+        
+        if (response.ok) {
+          setStatus('success');
+        } else {
+          setStatus('error');
+        }
+      } else {
+        setStatus('error');
+      }
     } catch (err) {
+      console.error('Upload error:', err);
       setStatus('error');
     }
   };
