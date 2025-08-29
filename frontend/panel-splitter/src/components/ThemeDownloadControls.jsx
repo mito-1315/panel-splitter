@@ -1,4 +1,5 @@
 import React from 'react';
+import { themeNames } from '../constants/themes';
 
 export const ThemeDownloadControls = () => {
   return (
@@ -6,12 +7,9 @@ export const ThemeDownloadControls = () => {
       <div className="ps-row" style={{ gap: 8 }}>
         <span className="ps-section-title">DOWNLOAD THEME:</span>
         <select className="ps-select">
-          <option>THEME 1</option>
-          <option>THEME 2</option>
-          <option>THEME 3</option>
-          <option>THEME 4</option>
-          <option>THEME 5</option>
-          <option>THEME 6</option>
+          {themeNames.map((name, idx) => (
+            <option key={idx}>{name}</option>
+          ))}
         </select>
         <button className="ps-button">DOWNLOAD THEME</button>
       </div>
