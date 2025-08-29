@@ -4,6 +4,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { uploadCSV } from '../controllers/uploadController.js';
 
 /**
  * @swagger
@@ -114,34 +115,6 @@ const upload = multer({
  *                   type: string
  *                   example: Error message
  */
-router.post('/upload', upload.single('file'), (req, res) => {
-  try {
-    if (!req.file) {
-      return res.status(400).json({ success: false, message: 'No file uploaded' });
-    }
-    
-    // File validation could be done here if needed
-    // For example, checking CSV structure, headers, etc.
-    
-    // Return success response with file details
-    return res.status(200).json({
-      success: true,
-      message: 'File uploaded successfully',
-      file: {
-        filename: req.file.filename,
-        originalname: req.file.originalname,
-        path: req.file.path,
-        size: req.file.size
-      }
-    });
-  } catch (error) {
-    console.error('Error uploading file:', error);
-    return res.status(500).json({
-      success: false,
-      message: 'Error uploading file',
-      error: error.message
-    });
-  }
-});
+router.post('/upload', upload.single('file'), uploadCSV);
 
 export default router;
