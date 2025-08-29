@@ -1,0 +1,113 @@
+:root {
+  --bg: #0e0f12;
+  --panel: #17191f;
+  --text: #e7e7ea;
+  --muted: #a2a2a9;
+  --accent: #8ab4ff;
+  --border: #2a2d36;
+}
+
+* { box-sizing: border-box; }
+
+body, #root, .ps-root {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+.ps-root { padding: 16px; }
+
+.ps-header {
+  font-size: 22px;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.ps-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.ps-row { display: flex; gap: 12px; align-items: center; }
+.ps-col { display: flex; flex-direction: column; gap: 8px; }
+
+.ps-button {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.ps-button.primary { border-color: var(--accent); color: var(--accent); }
+
+.ps-select, .ps-input {
+  background: #0c0d11;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  border-radius: 6px;
+}
+
+.ps-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+
+.ps-grid .cell {
+  min-height: 200px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.ps-tables { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+
+.ps-table { width: 100%; border-collapse: collapse; }
+.ps-table th, .ps-table td { border: 1px solid var(--border); padding: 6px 8px; text-align: left; }
+.ps-table th { color: var(--muted); font-weight: 600; }
+
+.ps-section-title { font-size: 14px; color: var(--muted); margin-bottom: 6px; }
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
