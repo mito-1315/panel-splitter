@@ -47,12 +47,11 @@ export const ThemeGrid = () => {
     setLoading(true);
     setError('');
     try {
-      // Expected backend route; adjust as needed
-      const res = await fetch(`/api/themes/${encodeURIComponent(themeName)}`);
+      const res = await fetch(`http://localhost:5000/api/themes/${encodeURIComponent(themeName)}`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const text = await res.text();
-      const matrix = csvToMatrix(text);
-      setSheet(matrix);
+      const json = await res.json();
+      // Use the converted property from backend response
+      setSheet(json.converted || { header: [], rows: [] });
     } catch (e) {
       setError('Failed to load CSV from backend. You can upload a CSV below.');
       setSheet({ header: [], rows: [] });
