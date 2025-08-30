@@ -74,9 +74,12 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Import routes
 import uploadRoute from './routes/uploadRoute.js';
+import themeDisplayRoute from './routes/themeDisplayRoute.js'; // Add this line
 
 // Use routes
 app.use('/', uploadRoute);
+app.use('/api', uploadRoute); // Prefix routes with /api
+app.use('/api', themeDisplayRoute); // Mount themeDisplayRoute under /api
 
 // Start server
 app.listen(PORT, () => {
