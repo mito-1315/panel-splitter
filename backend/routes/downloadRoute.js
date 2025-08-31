@@ -4,6 +4,6 @@ import { downloadTheme, downloadAllThemes } from '../controllers/downloadControl
 const router = express.Router();
 
 router.get('/download/:theme', downloadTheme);
-router.get('/download/all', downloadAllThemes);
+router.get('/bro/all', downloadAllThemes);
 
 export default router;
