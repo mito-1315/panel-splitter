@@ -24,25 +24,9 @@ export const ThemeDownloadControls = () => {
   };
 
   const handleDownloadAll = async () => {
-    //console.log('Downloading all themes');
-    
-      //console.log('in')
-      fetch('http://localhost:5000/api/download/all').then(res=>res.blob().then(blob=>{
-        const url = window.URL.createObjectURL(blob);
-        const link=document.createElement('a');
-        link.href=url;
-        link.download='all.csv';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        link.remove();
-        window.URL.revokeObjectURL(url);
-      }).catch(err=>{
-        alert(`Failed to download all themes data : ${err.message}`);
-      }
-      ));
-      //if (!res.ok) throw new Error('Download failed');
-      /*console.log(res)
+    try {
+      const res = await fetch(`http://localhost:5000/api/bro/all`);
+      if (!res.ok) throw new Error('Download failed');
       const blob = await res.blob();
       console.log(blob)
       const url = window.URL.createObjectURL(blob);
@@ -52,8 +36,12 @@ export const ThemeDownloadControls = () => {
       document.body.appendChild(a);
       a.click();
       a.remove();
-      window.URL.revokeObjectURL(url);*/
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      alert('Failed to download theme data');
+    }
   };
+;
 
   return (
     <div className="ps-row" style={{ gap: 16, margin: '8px 0 12px' }}>

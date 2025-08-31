@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Download Debug</title>
+</head>
+<body>
+    <h1>CSV Download Debug Test</h1>
+    <button onclick="testEndpoint()">Test Endpoint</button>
+    <button onclick="testDownload()">Test Download</button>
+    <button onclick="testSimpleDownload()">Test Simple Download</button>
+    
+    <div id="output" style="margin-top: 20px; padding: 10px; background: #f0f0f0; font-family: monospace; white-space: pre-wrap;"></div>
+
+    <script>
+        const log = (message) => {
+            const output = document.getElementById('output');
+            output.textContent += new Date().toISOString() + ': ' + message + '\n';
+            console.log(message);
+        };
+
+        const testEndpoint = async () => {
+            log('=== Testing Endpoint ===');
+            try {
+                const response = await fetch('http://localhost:5000/api/download/all');
+                log(`Status: ${response.status} ${response.statusText}`);
+                log(`Headers: ${JSON.stringify([...response.headers.entries()])}`);
+                
+                const text = await response.text();
+                log(`Response length: ${text.length}`);
+                log(`First 500 chars: ${text.substring(0, 500)}`);
+                
+                if (text.length > 500) {
+                    log(`Last 200 chars: ${text.substring(text.length - 200)}`);
+                }
+                
+            } catch (error) {
+                log(`ERROR: ${error.message}`);
+                log(`Stack: ${error.stack}`);
+            }
+        };
+
+        const testDownload = async () => {
+            log('=== Testing Download ===');
+            try {
+                const response = await fetch('http://localhost:5000/api/download/all');
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    log(`HTTP Error: ${response.status} - ${errorText}`);
+                    return;
+                }
+
+                const blob = await response.blob();
+                log(`Blob created - Size: ${blob.size}, Type: ${blob.type}`);
+
+                if (blob.size === 0) {
+                    log('ERROR: Blob is empty!');
+                    return;
+                }
+
+                // Create download
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'test_download.csv';
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                log('Download triggered successfully');
+                
+            } catch (error) {
+                log(`ERROR: ${error.message}`);
+            }
+        };
+
+        const testSimpleDownload = () => {
+            log('=== Testing Simple Download ===');
+            try {
+                window.open('http://localhost:5000/api/download/all', '_blank');
+                log('Simple download triggered');
+            } catch (error) {
+                log(`ERROR: ${error.message}`);
+            }
+        };
+    </script>
+</body>
+</html>
