@@ -85,7 +85,7 @@ export const PanelTable = () => {
         }
       } else {
         // No space available, extend the table
-        const newRow = Array(4).fill(null);
+        const newRow = Array(numPanels).fill(null);
         newTable.push(newRow);
         for (let i = newTable.length - 1; i > row; i--) {
           newTable[i][col] = newTable[i - 1][col];
@@ -100,6 +100,13 @@ export const PanelTable = () => {
     }
     
     setPanelTable(newTable);
+
+    // Notify TeamTable that a team is now used
+    if (data.content && data.type === 'team') {
+      window.dispatchEvent(new CustomEvent('teamUsed', { 
+        detail: { uniqueId: data.content.uniqueId } 
+      }));
+    }
   };
 
   const handleDragOver = (e) => {
@@ -113,8 +120,16 @@ export const PanelTable = () => {
 
   const removeTeam = (row, col) => {
     const newTable = [...panelTable];
+    const removedTeam = newTable[row][col];
     newTable[row][col] = null;
     setPanelTable(newTable);
+
+    // Notify TeamTable that a team is no longer used
+    if (removedTeam) {
+      window.dispatchEvent(new CustomEvent('teamRemoved', { 
+        detail: { uniqueId: removedTeam.uniqueId } 
+      }));
+    }
   };
 
   return (

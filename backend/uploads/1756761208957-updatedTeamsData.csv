@@ -1,0 +1,476 @@
+teamId,teamName,problemStatementId,theme
+5829,Quantum Innovators,25018,MedTech / BioTech / HealthTech
+5829,Quantum Innovators,25063,Disaster Management
+8314,Logic Ninjas,25063,Disaster Management
+8314,Logic Ninjas,25041,MedTech / BioTech / HealthTech
+1947,Future Wizards,25041,MedTech / BioTech / HealthTech
+1947,Future Wizards,25023,MedTech / BioTech / HealthTech
+6281,Data Crusaders,25023,MedTech / BioTech / HealthTech
+6281,Data Crusaders,25073,Fitness & Sports
+9015,Pixel Hackers,25073,Fitness & Sports
+9015,Pixel Hackers,25004,Agriculture, FoodTech & Rural Development
+3378,Cyber Pioneers,25004,Agriculture, FoodTech & Rural Development
+3378,Cyber Pioneers,25053,Agriculture, FoodTech & Rural Development
+4821,Global Dreamers,25053,Agriculture, FoodTech & Rural Development
+4821,Global Dreamers,25011,Smart Education
+7759,Nano Solutions,25011,Smart Education
+7759,Nano Solutions,25064,Renewable / Sustainable Energy
+2093,Code Dynamics,25064,Renewable / Sustainable Energy
+2093,Code Dynamics,25035,Smart Education
+5160,United Synergy,25035,Smart Education
+5160,United Synergy,25020,Smart Automation
+8842,Quantum Ninjas,25020,Smart Automation
+8842,Quantum Ninjas,25083,MedTech / BioTech / HealthTech
+1234,Logic Hackers,25083,MedTech / BioTech / HealthTech
+1234,Logic Hackers,25049,MedTech / BioTech / HealthTech
+9573,Future Innovators,25049,MedTech / BioTech / HealthTech
+9573,Future Innovators,25071,Disaster Management
+6428,Data Pioneers,25071,Disaster Management
+6428,Data Pioneers,25015,Agriculture, FoodTech & Rural Development
+2819,Pixel Dreamers,25015,Agriculture, FoodTech & Rural Development
+2819,Pixel Dreamers,25060,Clean & Green Technology
+7301,Cyber Crusaders,25060,Clean & Green Technology
+7301,Cyber Crusaders,25008,Disaster Management
+4055,Global Solutions,25008,Disaster Management
+4055,Global Solutions,25038,Smart Education
+1687,Nano Dynamics,25038,Smart Education
+1687,Nano Dynamics,25028,Smart Education
+8110,Code Synergy,25028,Smart Education
+8110,Code Synergy,25055,Miscellaneous
+5396,United Wizards,25055,Miscellaneous
+5396,United Wizards,25081,Smart Automation
+3724,Quantum Hackers,25081,Smart Automation
+3724,Quantum Hackers,25025,MedTech / BioTech / HealthTech
+6079,Logic Innovators,25025,MedTech / BioTech / HealthTech
+6079,Logic Innovators,25046,Smart Automation
+2502,Future Pioneers,25046,Smart Automation
+2502,Future Pioneers,25076,Agriculture, FoodTech & Rural Development
+9861,Data Dreamers,25076,Agriculture, FoodTech & Rural Development
+9861,Data Dreamers,25001,MedTech / BioTech / HealthTech
+4435,Pixel Crusaders,25001,MedTech / BioTech / HealthTech
+4435,Pixel Crusaders,25066,Smart Automation
+1198,Cyber Solutions,25066,Smart Automation
+1198,Cyber Solutions,25031,Agriculture, FoodTech & Rural Development
+7654,Global Dynamics,25031,Agriculture, FoodTech & Rural Development
+7654,Global Dynamics,25058,Miscellaneous
+3982,Nano Synergy,25058,Miscellaneous
+3982,Nano Synergy,25013,Transportation & Logistics
+8520,Code Wizards,25013,Transportation & Logistics
+8520,Code Wizards,25079,Disaster Management
+5708,United Ninjas,25079,Disaster Management
+5708,United Ninjas,25034,Agriculture, FoodTech & Rural Development
+1043,Quantum Innovators,25034,Agriculture, FoodTech & Rural Development
+1043,Quantum Innovators,25002,Travel & Tourism
+6891,Logic Pioneers,25002,Travel & Tourism
+6891,Logic Pioneers,25069,Miscellaneous
+3276,Future Dreamers,25069,Miscellaneous
+3276,Future Dreamers,25022,Transportation & Logistics
+9157,Data Crusaders,25022,Transportation & Logistics
+9157,Data Crusaders,25045,Smart Automation
+4780,Pixel Solutions,25045,Smart Automation
+4780,Pixel Solutions,25080,Smart Automation
+2313,Cyber Dynamics,25080,Smart Automation
+2313,Cyber Dynamics,25010,Agriculture, FoodTech & Rural Development
+7066,Global Synergy,25010,Agriculture, FoodTech & Rural Development
+7066,Global Synergy,25037,Smart Education
+5549,Nano Wizards,25037,Smart Education
+5549,Nano Wizards,25059,Miscellaneous
+8632,Code Ninjas,25059,Miscellaneous
+8632,Code Ninjas,25019,Smart Education
+1475,United Hackers,25019,Smart Education
+1475,United Hackers,25062,Agriculture, FoodTech & Rural Development
+9321,Quantum Pioneers,25062,Agriculture, FoodTech & Rural Development
+9321,Quantum Pioneers,25005,Agriculture, FoodTech & Rural Development
+3607,Logic Dreamers,25005,Agriculture, FoodTech & Rural Development
+3607,Logic Dreamers,25029,Smart Education
+6950,Future Crusaders,25029,Smart Education
+6950,Future Crusaders,25052,Heritage & Culture
+2188,Data Solutions,25052,Heritage & Culture
+2188,Data Solutions,25077,Smart Automation
+7412,Pixel Dynamics,25077,Smart Automation
+7412,Pixel Dynamics,25016,Smart Education
+4264,Cyber Synergy,25016,Smart Education
+4264,Cyber Synergy,25042,MedTech / BioTech / HealthTech
+1839,Global Wizards,25042,MedTech / BioTech / HealthTech
+1839,Global Wizards,25067,Miscellaneous
+8003,Nano Ninjas,25067,Miscellaneous
+8003,Nano Ninjas,25032,Agriculture, FoodTech & Rural Development
+5227,Code Hackers,25032,Agriculture, FoodTech & Rural Development
+5227,Code Hackers,25003,Transportation & Logistics
+3516,United Innovators,25003,Transportation & Logistics
+3516,United Innovators,25050,Transportation & Logistics
+9785,Quantum Dreamers,25050,Transportation & Logistics
+9785,Quantum Dreamers,25074,Agriculture, FoodTech & Rural Development
+6641,Logic Crusaders,25074,Agriculture, FoodTech & Rural Development
+6641,Logic Crusaders,25012,Smart Education
+2930,Future Solutions,25012,Smart Education
+2930,Future Solutions,25039,Smart Education
+7894,Data Dynamics,25039,Smart Education
+7894,Data Dynamics,25065,Smart Automation
+4577,Pixel Synergy,25065,Smart Automation
+4577,Pixel Synergy,25026,MedTech / BioTech / HealthTech
+1352,Cyber Wizards,25026,MedTech / BioTech / HealthTech
+1352,Cyber Wizards,25048,Robotics and Drones
+8769,Global Ninjas,25048,Robotics and Drones
+8769,Global Ninjas,25006,Agriculture, FoodTech & Rural Development
+5918,Nano Hackers,25006,Agriculture, FoodTech & Rural Development
+5918,Nano Hackers,25070,Miscellaneous
+3143,Code Innovators,25070,Miscellaneous
+3143,Code Innovators,25033,Agriculture, FoodTech & Rural Development
+9406,United Pioneers,25033,Agriculture, FoodTech & Rural Development
+9406,United Pioneers,25056,Miscellaneous
+6370,Quantum Crusaders,25056,Miscellaneous
+6370,Quantum Crusaders,25017,Smart Education
+2659,Logic Solutions,25017,Smart Education
+2659,Logic Solutions,25043,MedTech / BioTech / HealthTech
+7233,Future Dynamics,25043,MedTech / BioTech / HealthTech
+7233,Future Dynamics,25068,Miscellaneous
+4986,Data Synergy,25068,Miscellaneous
+4986,Data Synergy,25009,Smart Education
+1504,Pixel Wizards,25009,Smart Education
+1504,Pixel Wizards,25036,Smart Education
+8251,Cyber Ninjas,25036,Smart Education
+8251,Cyber Ninjas,25057,Miscellaneous
+5675,Global Hackers,25057,Miscellaneous
+5675,Global Hackers,25021,Transportation & Logistics
+3899,Nano Innovators,25021,Transportation & Logistics
+3899,Nano Innovators,25047,Robotics and Drones
+9214,Code Pioneers,25047,Robotics and Drones
+9214,Code Pioneers,25072,Renewable / Sustainable Energy
+6125,United Dreamers,25072,Renewable / Sustainable Energy
+6125,United Dreamers,25014,Clean & Green Technology
+2467,Quantum Solutions,25014,Clean & Green Technology
+2467,Quantum Solutions,25040,Smart Education
+7582,Logic Dynamics,25040,Smart Education
+7582,Logic Dynamics,25061,Travel & Tourism
+4109,Future Synergy,25061,Travel & Tourism
+4109,Future Synergy,25024,MedTech / BioTech / HealthTech
+1763,Data Wizards,25024,MedTech / BioTech / HealthTech
+1763,Data Wizards,25051,Renewable / Sustainable Energy
+8438,Pixel Ninjas,25051,Renewable / Sustainable Energy
+8438,Pixel Ninjas,25007,Agriculture, FoodTech & Rural Development
+5021,Cyber Hackers,25007,Agriculture, FoodTech & Rural Development
+5021,Cyber Hackers,25030,Agriculture, FoodTech & Rural Development
+3305,Global Innovators,25030,Agriculture, FoodTech & Rural Development
+3305,Global Innovators,25054,Smart Automation
+9697,Nano Pioneers,25054,Smart Automation
+9697,Nano Pioneers,25078,Miscellaneous
+6553,Code Dreamers,25078,Miscellaneous
+6553,Code Dreamers,25027,Blockchain & Cybersecurity
+2742,United Crusaders,25027,Blockchain & Cybersecurity
+2742,United Crusaders,25044,MedTech / BioTech / HealthTech
+7976,Quantum Dynamics,25044,MedTech / BioTech / HealthTech
+7976,Quantum Dynamics,25075,Agriculture, FoodTech & Rural Development
+4320,Logic Synergy,25075,Agriculture, FoodTech & Rural Development
+4320,Logic Synergy,25001,MedTech / BioTech / HealthTech
+1991,Future Wizards,25001,MedTech / BioTech / HealthTech
+1991,Future Wizards,25038,Smart Education
+8688,Data Ninjas,25038,Smart Education
+8688,Data Ninjas,25063,Disaster Management
+5874,Pixel Hackers,25063,Disaster Management
+5874,Pixel Hackers,25020,Smart Automation
+3037,Cyber Innovators,25020,Smart Automation
+3037,Cyber Innovators,25049,MedTech / BioTech / HealthTech
+9083,Global Pioneers,25049,MedTech / BioTech / HealthTech
+9083,Global Pioneers,25071,Disaster Management
+6712,Nano Dreamers,25071,Disaster Management
+6712,Nano Dreamers,25015,Agriculture, FoodTech & Rural Development
+2256,Code Crusaders,25015,Agriculture, FoodTech & Rural Development
+2256,Code Crusaders,25060,Clean & Green Technology
+7140,United Solutions,25060,Clean & Green Technology
+7140,United Solutions,25008,Disaster Management
+4623,Quantum Wizards,25008,Disaster Management
+4623,Quantum Wizards,25035,Smart Education
+1381,Logic Ninjas,25035,Smart Education
+1381,Logic Ninjas,25055,Miscellaneous
+8907,Future Hackers,25055,Miscellaneous
+8907,Future Hackers,25081,Smart Automation
+5465,Data Innovators,25081,Smart Automation
+5465,Data Innovators,25025,MedTech / BioTech / HealthTech
+3658,Pixel Pioneers,25025,MedTech / BioTech / HealthTech
+3658,Pixel Pioneers,25046,Smart Automation
+9929,Cyber Dreamers,25046,Smart Automation
+9929,Cyber Dreamers,25076,Agriculture, FoodTech & Rural Development
+6817,Global Crusaders,25076,Agriculture, FoodTech & Rural Development
+6817,Global Crusaders,25002,Travel & Tourism
+2045,Nano Solutions,25002,Travel & Tourism
+2045,Nano Solutions,25069,Miscellaneous
+7334,Code Dynamics,25069,Miscellaneous
+7334,Code Dynamics,25022,Transportation & Logistics
+4871,United Synergy,25022,Transportation & Logistics
+4871,United Synergy,25045,Smart Automation
+1128,Quantum Ninjas,25045,Smart Automation
+1128,Quantum Ninjas,25080,Smart Automation
+8593,Logic Hackers,25080,Smart Automation
+8593,Logic Hackers,25010,Agriculture, FoodTech & Rural Development
+5286,Future Innovators,25010,Agriculture, FoodTech & Rural Development
+5286,Future Innovators,25037,Smart Education
+3409,Data Pioneers,25037,Smart Education
+3409,Data Pioneers,25059,Miscellaneous
+9752,Pixel Dreamers,25059,Miscellaneous
+9752,Pixel Dreamers,25019,Smart Education
+6170,Cyber Crusaders,25019,Smart Education
+6170,Cyber Crusaders,25062,Agriculture, FoodTech & Rural Development
+2698,Global Solutions,25062,Agriculture, FoodTech & Rural Development
+2698,Global Solutions,25005,Agriculture, FoodTech & Rural Development
+7781,Nano Dynamics,25005,Agriculture, FoodTech & Rural Development
+7781,Nano Dynamics,25029,Smart Education
+4514,Code Synergy,25029,Smart Education
+4514,Code Synergy,25052,Heritage & Culture
+1267,United Wizards,25052,Heritage & Culture
+1267,United Wizards,25077,Smart Automation
+8030,Quantum Hackers,25077,Smart Automation
+8030,Quantum Hackers,25016,Smart Education
+5604,Logic Innovators,25016,Smart Education
+5604,Logic Innovators,25042,MedTech / BioTech / HealthTech
+3791,Future Pioneers,25042,MedTech / BioTech / HealthTech
+3791,Future Pioneers,25067,Miscellaneous
+9543,Data Dreamers,25067,Miscellaneous
+9543,Data Dreamers,25032,Agriculture, FoodTech & Rural Development
+6236,Pixel Crusaders,25032,Agriculture, FoodTech & Rural Development
+6236,Pixel Crusaders,25003,Transportation & Logistics
+2865,Cyber Solutions,25003,Transportation & Logistics
+2865,Cyber Solutions,25050,Transportation & Logistics
+7919,Global Dynamics,25050,Transportation & Logistics
+7919,Global Dynamics,25074,Agriculture, FoodTech & Rural Development
+4088,Nano Synergy,25074,Agriculture, FoodTech & Rural Development
+4088,Nano Synergy,25012,Smart Education
+1611,Code Wizards,25012,Smart Education
+1611,Code Wizards,25039,Smart Education
+8366,United Ninjas,25039,Smart Education
+8366,United Ninjas,25065,Smart Automation
+5139,Quantum Innovators,25065,Smart Automation
+5139,Quantum Innovators,25026,MedTech / BioTech / HealthTech
+3922,Logic Pioneers,25026,MedTech / BioTech / HealthTech
+3922,Logic Pioneers,25048,Robotics and Drones
+9815,Future Dreamers,25048,Robotics and Drones
+9815,Future Dreamers,25006,Agriculture, FoodTech & Rural Development
+6499,Data Crusaders,25006,Agriculture, FoodTech & Rural Development
+6499,Data Crusaders,25070,Miscellaneous
+2347,Pixel Solutions,25070,Miscellaneous
+2347,Pixel Solutions,25033,Agriculture, FoodTech & Rural Development
+7000,Cyber Dynamics,25033,Agriculture, FoodTech & Rural Development
+7000,Cyber Dynamics,25056,Miscellaneous
+4733,Global Synergy,25056,Miscellaneous
+4733,Global Synergy,25017,Smart Education
+1076,Nano Wizards,25017,Smart Education
+1076,Nano Wizards,25043,MedTech / BioTech / HealthTech
+8802,Code Ninjas,25043,MedTech / BioTech / HealthTech
+8802,Code Ninjas,25068,Miscellaneous
+5578,United Hackers,25068,Miscellaneous
+5578,United Hackers,25009,Smart Education
+3211,Quantum Pioneers,25009,Smart Education
+3211,Quantum Pioneers,25036,Smart Education
+9474,Logic Dreamers,25036,Smart Education
+9474,Logic Dreamers,25057,Miscellaneous
+6038,Future Crusaders,25057,Miscellaneous
+6038,Future Crusaders,25021,Transportation & Logistics
+2561,Data Solutions,25021,Transportation & Logistics
+2561,Data Solutions,25047,Robotics and Drones
+7625,Pixel Dynamics,25047,Robotics and Drones
+7625,Pixel Dynamics,25072,Renewable / Sustainable Energy
+4192,Cyber Synergy,25072,Renewable / Sustainable Energy
+4192,Cyber Synergy,25014,Clean & Green Technology
+1856,Global Wizards,25014,Clean & Green Technology
+1856,Global Wizards,25040,Smart Education
+8173,Nano Ninjas,25040,Smart Education
+8173,Nano Ninjas,25061,Travel & Tourism
+5350,Code Hackers,25061,Travel & Tourism
+5350,Code Hackers,25024,MedTech / BioTech / HealthTech
+3084,United Innovators,25024,MedTech / BioTech / HealthTech
+3084,United Innovators,25051,Renewable / Sustainable Energy
+9646,Quantum Dreamers,25051,Renewable / Sustainable Energy
+9646,Quantum Dreamers,25007,Agriculture, FoodTech & Rural Development
+6909,Logic Crusaders,25007,Agriculture, FoodTech & Rural Development
+6909,Logic Crusaders,25030,Agriculture, FoodTech & Rural Development
+2137,Future Solutions,25030,Agriculture, FoodTech & Rural Development
+2137,Future Solutions,25054,Smart Automation
+7460,Data Dynamics,25054,Smart Automation
+7460,Data Dynamics,25078,Miscellaneous
+4393,Pixel Synergy,25078,Miscellaneous
+4393,Pixel Synergy,25027,Blockchain & Cybersecurity
+1729,Cyber Wizards,25027,Blockchain & Cybersecurity
+1729,Cyber Wizards,25044,MedTech / BioTech / HealthTech
+8286,Global Ninjas,25044,MedTech / BioTech / HealthTech
+8286,Global Ninjas,25075,Agriculture, FoodTech & Rural Development
+5952,Nano Hackers,25075,Agriculture, FoodTech & Rural Development
+5952,Nano Hackers,25018,MedTech / BioTech / HealthTech
+3575,Code Innovators,25018,MedTech / BioTech / HealthTech
+3575,Code Innovators,25063,Disaster Management
+9111,United Pioneers,25063,Disaster Management
+9111,United Pioneers,25023,MedTech / BioTech / HealthTech
+6337,Quantum Crusaders,25023,MedTech / BioTech / HealthTech
+6337,Quantum Crusaders,25073,Fitness & Sports
+2780,Logic Solutions,25073,Fitness & Sports
+2780,Logic Solutions,25004,Agriculture, FoodTech & Rural Development
+7824,Future Dynamics,25004,Agriculture, FoodTech & Rural Development
+7824,Future Dynamics,25053,Agriculture, FoodTech & Rural Development
+4458,Data Synergy,25053,Agriculture, FoodTech & Rural Development
+4458,Data Synergy,25011,Smart Education
+1583,Pixel Wizards,25011,Smart Education
+1583,Pixel Wizards,25064,Renewable / Sustainable Energy
+8057,Cyber Ninjas,25064,Renewable / Sustainable Energy
+8057,Cyber Ninjas,25031,Agriculture, FoodTech & Rural Development
+5731,Global Hackers,25031,Agriculture, FoodTech & Rural Development
+5731,Global Hackers,25058,Miscellaneous
+3166,Nano Innovators,25058,Miscellaneous
+3166,Nano Innovators,25013,Transportation & Logistics
+9369,Code Pioneers,25013,Transportation & Logistics
+9369,Code Pioneers,25079,Disaster Management
+6682,United Dreamers,25079,Disaster Management
+6682,United Dreamers,25034,Agriculture, FoodTech & Rural Development
+2995,Quantum Solutions,25034,Agriculture, FoodTech & Rural Development
+2995,Quantum Solutions,25001,MedTech / BioTech / HealthTech
+7258,Logic Dynamics,25001,MedTech / BioTech / HealthTech
+7258,Logic Dynamics,25066,Smart Automation
+4911,Future Synergy,25066,Smart Automation
+4911,Future Synergy,25038,Smart Education
+1434,Data Wizards,25038,Smart Education
+1434,Data Wizards,25059,Miscellaneous
+8727,Pixel Ninjas,25059,Miscellaneous
+8727,Pixel Ninjas,25019,Smart Education
+5090,Cyber Hackers,25019,Smart Education
+5090,Cyber Hackers,25062,Agriculture, FoodTech & Rural Development
+3853,Global Innovators,25062,Agriculture, FoodTech & Rural Development
+3853,Global Innovators,25005,Agriculture, FoodTech & Rural Development
+9505,Nano Pioneers,25005,Agriculture, FoodTech & Rural Development
+9505,Nano Pioneers,25029,Smart Education
+6589,Code Dreamers,25029,Smart Education
+6589,Code Dreamers,25052,Heritage & Culture
+2828,United Crusaders,25052,Heritage & Culture
+2828,United Crusaders,25077,Smart Automation
+7181,Quantum Dynamics,25077,Smart Automation
+7181,Quantum Dynamics,25016,Smart Education
+4654,Logic Synergy,25016,Smart Education
+4654,Logic Synergy,25042,MedTech / BioTech / HealthTech
+1917,Future Wizards,25042,MedTech / BioTech / HealthTech
+1917,Future Wizards,25067,Miscellaneous
+8480,Data Ninjas,25067,Miscellaneous
+8480,Data Ninjas,25032,Agriculture, FoodTech & Rural Development
+5643,Pixel Hackers,25032,Agriculture, FoodTech & Rural Development
+5643,Pixel Hackers,25003,Transportation & Logistics
+3268,Cyber Innovators,25003,Transportation & Logistics
+3268,Cyber Innovators,25050,Transportation & Logistics
+9024,Global Pioneers,25050,Transportation & Logistics
+9024,Global Pioneers,25074,Agriculture, FoodTech & Rural Development
+6755,Nano Dreamers,25074,Agriculture, FoodTech & Rural Development
+6755,Nano Dreamers,25012,Smart Education
+2299,Code Crusaders,25012,Smart Education
+2299,Code Crusaders,25039,Smart Education
+7093,United Solutions,25039,Smart Education
+7093,United Solutions,25065,Smart Automation
+4356,Quantum Wizards,25065,Smart Automation
+4356,Quantum Wizards,25026,MedTech / BioTech / HealthTech
+1649,Logic Ninjas,25026,MedTech / BioTech / HealthTech
+1649,Logic Ninjas,25048,Robotics and Drones
+8975,Future Hackers,25048,Robotics and Drones
+8975,Future Hackers,25006,Agriculture, FoodTech & Rural Development
+5318,Data Innovators,25006,Agriculture, FoodTech & Rural Development
+5318,Data Innovators,25070,Miscellaneous
+3441,Pixel Pioneers,25070,Miscellaneous
+3441,Pixel Pioneers,25033,Agriculture, FoodTech & Rural Development
+9710,Cyber Dreamers,25033,Agriculture, FoodTech & Rural Development
+9710,Cyber Dreamers,25056,Miscellaneous
+6138,Global Crusaders,25056,Miscellaneous
+6138,Global Crusaders,25017,Smart Education
+2627,Nano Solutions,25017,Smart Education
+2627,Nano Solutions,25043,MedTech / BioTech / HealthTech
+7710,Code Dynamics,25043,MedTech / BioTech / HealthTech
+7710,Code Dynamics,25068,Miscellaneous
+4243,United Synergy,25068,Miscellaneous
+4243,United Synergy,25009,Smart Education
+1807,Quantum Ninjas,25009,Smart Education
+1807,Quantum Ninjas,25036,Smart Education
+8552,Logic Hackers,25036,Smart Education
+8552,Logic Hackers,25057,Miscellaneous
+5837,Future Innovators,25057,Miscellaneous
+5837,Future Innovators,25021,Transportation & Logistics
+3960,Data Pioneers,25021,Transportation & Logistics
+3960,Data Pioneers,25047,Robotics and Drones
+9602,Pixel Dreamers,25047,Robotics and Drones
+9602,Pixel Dreamers,25072,Renewable / Sustainable Energy
+6305,Cyber Crusaders,25072,Renewable / Sustainable Energy
+6305,Cyber Crusaders,25014,Clean & Green Technology
+2534,Global Solutions,25014,Clean & Green Technology
+2534,Global Solutions,25040,Smart Education
+7508,Nano Dynamics,25040,Smart Education
+7508,Nano Dynamics,25061,Travel & Tourism
+4031,Code Synergy,25061,Travel & Tourism
+4031,Code Synergy,25024,MedTech / BioTech / HealthTech
+1555,United Wizards,25024,MedTech / BioTech / HealthTech
+1555,United Wizards,25051,Renewable / Sustainable Energy
+8329,Quantum Hackers,25051,Renewable / Sustainable Energy
+8329,Quantum Hackers,25007,Agriculture, FoodTech & Rural Development
+5002,Logic Innovators,25007,Agriculture, FoodTech & Rural Development
+5002,Logic Innovators,25030,Agriculture, FoodTech & Rural Development
+3686,Future Pioneers,25030,Agriculture, FoodTech & Rural Development
+3686,Future Pioneers,25054,Smart Automation
+9278,Data Dreamers,25054,Smart Automation
+9278,Data Dreamers,25078,Miscellaneous
+6861,Pixel Crusaders,25078,Miscellaneous
+6861,Pixel Crusaders,25027,Blockchain & Cybersecurity
+2100,Cyber Solutions,25027,Blockchain & Cybersecurity
+2100,Cyber Solutions,25044,MedTech / BioTech / HealthTech
+7424,Global Dynamics,25044,MedTech / BioTech / HealthTech
+7424,Global Dynamics,25075,Agriculture, FoodTech & Rural Development
+4957,Nano Synergy,25075,Agriculture, FoodTech & Rural Development
+4957,Nano Synergy,25018,MedTech / BioTech / HealthTech
+1311,Code Wizards,25018,MedTech / BioTech / HealthTech
+1311,Code Wizards,25063,Disaster Management
+8614,United Ninjas,25063,Disaster Management
+8614,United Ninjas,25023,MedTech / BioTech / HealthTech
+5488,Quantum Innovators,25023,MedTech / BioTech / HealthTech
+5488,Quantum Innovators,25073,Fitness & Sports
+3012,Logic Pioneers,25073,Fitness & Sports
+3012,Logic Pioneers,25004,Agriculture, FoodTech & Rural Development
+9184,Future Dreamers,25004,Agriculture, FoodTech & Rural Development
+9184,Future Dreamers,25053,Agriculture, FoodTech & Rural Development
+6007,Data Crusaders,25053,Agriculture, FoodTech & Rural Development
+6007,Data Crusaders,25011,Smart Education
+2436,Pixel Solutions,25011,Smart Education
+2436,Pixel Solutions,25064,Renewable / Sustainable Energy
+7369,Cyber Dynamics,25064,Renewable / Sustainable Energy
+7369,Cyber Dynamics,25031,Agriculture, FoodTech & Rural Development
+4802,Global Synergy,25031,Agriculture, FoodTech & Rural Development
+4802,Global Synergy,25058,Miscellaneous
+1165,Nano Wizards,25058,Miscellaneous
+1165,Nano Wizards,25013,Transportation & Logistics
+8880,Code Ninjas,25013,Transportation & Logistics
+8880,Code Ninjas,25079,Disaster Management
+5254,United Hackers,25079,Disaster Management
+5254,United Hackers,25034,Agriculture, FoodTech & Rural Development
+3537,Quantum Pioneers,25034,Agriculture, FoodTech & Rural Development
+3537,Quantum Pioneers,25002,Travel & Tourism
+9999,Logic Dreamers,25002,Travel & Tourism
+9999,Logic Dreamers,25069,Miscellaneous
+6613,Future Crusaders,25069,Miscellaneous
+6613,Future Crusaders,25022,Transportation & Logistics
+2964,Data Solutions,25022,Transportation & Logistics
+2964,Data Solutions,25045,Smart Automation
+7858,Pixel Dynamics,25045,Smart Automation
+7858,Pixel Dynamics,25080,Smart Automation
+4591,Cyber Synergy,25080,Smart Automation
+4591,Cyber Synergy,25010,Agriculture, FoodTech & Rural Development
+1224,Global Wizards,25010,Agriculture, FoodTech & Rural Development
+1224,Global Wizards,25037,Smart Education
+8087,Nano Ninjas,25037,Smart Education
+8087,Nano Ninjas,25059,Miscellaneous
+5761,Code Hackers,25059,Miscellaneous
+5761,Code Hackers,25019,Smart Education
+3340,United Innovators,25019,Smart Education
+3340,United Innovators,25062,Agriculture, FoodTech & Rural Development
+9233,Quantum Dreamers,25062,Agriculture, FoodTech & Rural Development
+9233,Quantum Dreamers,25005,Agriculture, FoodTech & Rural Development
+6526,Logic Crusaders,25005,Agriculture, FoodTech & Rural Development
+6526,Logic Crusaders,25029,Smart Education
+2069,Future Solutions,25029,Smart Education
+2069,Future Solutions,25052,Heritage & Culture
+7683,Data Dynamics,25052,Heritage & Culture
+7683,Data Dynamics,25077,Smart Automation
+4150,Pixel Synergy,25077,Smart Automation
+4150,Pixel Synergy,25016,Smart Education
+1784,Cyber Wizards,25016,Smart Education
+1784,Cyber Wizards,25042,MedTech / BioTech / HealthTech
+8419,Global Ninjas,25042,MedTech / BioTech / HealthTech
+8419,Global Ninjas,25067,Miscellaneous
+5192,Nano Hackers,25067,Miscellaneous

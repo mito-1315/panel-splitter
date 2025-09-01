@@ -6,6 +6,7 @@ export const TeamTable = () => {
     Array.from({ length: 20 }, () => Array(14).fill(null))
   );
   const [loading, setLoading] = useState(true);
+  const [usedTeams, setUsedTeams] = useState([]);
 
   useEffect(() => {
     const fetchTeamData = async () => {
@@ -43,14 +44,45 @@ export const TeamTable = () => {
     };
 
     fetchTeamData();
+
+    // Load used teams from localStorage
+    const loadUsedTeams = () => {
+      const used = JSON.parse(localStorage.getItem('usedTeams') || '[]');
+      setUsedTeams(used);
+    };
+
+    loadUsedTeams();
+
+    // Listen for custom events when teams are used/removed
+    const handleTeamUsed = (e) => {
+      setUsedTeams(prev => [...prev, e.detail.uniqueId]);
+    };
+
+    const handleTeamRemoved = (e) => {
+      setUsedTeams(prev => prev.filter(id => id !== e.detail.uniqueId));
+    };
+
+    window.addEventListener('teamUsed', handleTeamUsed);
+    window.addEventListener('teamRemoved', handleTeamRemoved);
+
+    return () => {
+      window.removeEventListener('teamUsed', handleTeamUsed);
+      window.removeEventListener('teamRemoved', handleTeamRemoved);
+    };
   }, []);
 
   const handleDragStart = (e, row, col) => {
+    const cell = teamTable[row][col];
+    if (!cell || usedTeams.includes(cell.uniqueId)) {
+      e.preventDefault();
+      return;
+    }
+    
     e.dataTransfer.setData('text/plain', JSON.stringify({
       type: 'team',
       row,
       col,
-      content: teamTable[row][col]
+      content: cell
     }));
   };
 
@@ -80,21 +112,34 @@ export const TeamTable = () => {
           <tbody>
             {teamTable.map((rowData, r) => (
               <tr key={r}>
-                {rowData.map((cell, i) => (
-                  <td
-                    key={i}
-                    style={{ width: '150px', height: '50px', fontSize: '12px', padding: '4px' }}
-                    draggable={!!cell}
-                    onDragStart={(e) => handleDragStart(e, r, i)}
-                  >
-                    {cell ? (
-                      <div>
-                        <div style={{ fontWeight: 'bold' }}>{cell.teamName}</div>
-                        <div style={{ fontSize: '10px', color: '#666' }}>{cell.uniqueId}</div>
-                      </div>
-                    ) : ''}
-                  </td>
-                ))}
+                {rowData.map((cell, i) => {
+                  const isUsed = cell && usedTeams.includes(cell.uniqueId);
+                  return (
+                    <td
+                      key={i}
+                      style={{ 
+                        width: '150px', 
+                        height: '50px', 
+                        fontSize: '12px', 
+                        padding: '4px',
+                        opacity: isUsed ? 0.5 : 1,
+                        cursor: isUsed ? 'not-allowed' : (cell ? 'grab' : 'default')
+                      }}
+                      draggable={!!cell && !isUsed}
+                      onDragStart={(e) => handleDragStart(e, r, i)}
+                    >
+                      {cell ? (
+                        <div>
+                          <div style={{ fontWeight: 'bold' }}>{cell.teamName}</div>
+                          <div style={{ fontSize: '10px', color: '#666' }}>{cell.uniqueId}</div>
+                          {isUsed && (
+                            <div style={{ fontSize: '8px', color: 'red', fontStyle: 'italic' }}>In Use</div>
+                          )}
+                        </div>
+                      ) : ''}
+                    </td>
+                  );
+                })}
               </tr>
             ))}
           </tbody>
