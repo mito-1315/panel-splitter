@@ -2,7 +2,7 @@ import { themeTeamFetch } from '../service/themeDisplayService.js';
 
 export async function themeDisplay(req, res) {
   //console.log('themeDisplay controller called'); // Add this line
-  const { parameter } = req.params;
+  const parameter = req.params.parameter || req.params.theme;
   //console.log(parameter);
   try {
     res.set('Cache-Control', 'no-store'); // Disable caching

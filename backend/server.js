@@ -75,11 +75,17 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 // Import routes
 import uploadRoute from './routes/uploadRoute.js';
 import themeDisplayRoute from './routes/themeDisplayRoute.js'; // Add this line
+import downloadRoute from './routes/downloadRoute.js';
+import teamTableRoute from './routes/teamTableRoute.js';
+import panelTableRoute from './routes/panelTableRoute.js';
 
 // Use routes
 app.use('/', uploadRoute);
 app.use('/api', uploadRoute); // Prefix routes with /api
 app.use('/api', themeDisplayRoute); // Mount themeDisplayRoute under /api
+app.use('/api', downloadRoute);
+app.use('/api', teamTableRoute); // Fix spacing issue here
+app.use('/api',panelTableRoute)
 
 // Start server
 app.listen(PORT, () => {

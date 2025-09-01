@@ -50,8 +50,18 @@ export const ThemeGrid = () => {
       const res = await fetch(`http://localhost:5000/api/themes/${encodeURIComponent(themeName)}`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const json = await res.json();
-      // Use the converted property from backend response
-      setSheet(json.converted || { header: [], rows: [] });
+      // Convert data to { header, rows } if needed
+      let matrix;
+      if (json.converted) {
+        matrix = json.converted;
+      } else if (Array.isArray(json.data) && json.data.length > 0) {
+        const header = Object.keys(json.data[0]);
+        const rows = json.data.map(row => header.map(h => row[h]));
+        matrix = { header, rows };
+      } else {
+        matrix = { header: [], rows: [] };
+      }
+      setSheet(matrix);
     } catch (e) {
       setError('Failed to load CSV from backend. You can upload a CSV below.');
       setSheet({ header: [], rows: [] });
