@@ -17,7 +17,7 @@ export const TeamTable = () => {
       for (let themeIndex = 0; themeIndex < themeNames.length; themeIndex++) {
         const themeName = themeNames[themeIndex];
         try {
-          const response = await fetch(`http://localhost:5000/api/team/${encodeURIComponent(themeName)}`);
+          const response = await fetch(`http://localhost:5000/api/team/${encodeURIComponent(themeName)}` || `https://panel-splitter-1.onrender.com/api/team/${encodeURIComponent(themeName)}`);
           if (response.ok) {
             const contentType = response.headers.get('content-type');
             if (contentType && contentType.includes('application/json')) {

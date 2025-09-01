@@ -9,7 +9,7 @@ export const PanelTable = () => {
 
   const fetchDurationConfig = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/duration');
+      const response = await fetch('http://localhost:5000/api/duration' || 'https://panel-splitter-1.onrender.com/api/duration');
       if (response.ok) {
         const config = await response.json();
         const slots = generateTimeSlots(config.startTime, config.endTime, config.duration);
