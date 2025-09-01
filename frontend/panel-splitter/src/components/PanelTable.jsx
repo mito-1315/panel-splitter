@@ -12,14 +12,32 @@ export const PanelTable = () => {
         const config = await response.json();
         const slots = generateTimeSlots(config.startTime, config.endTime, config.duration);
         setTimeSlots(slots);
-        setPanelTable(Array.from({ length: slots.length }, () => Array(numPanels).fill(null)));
+        
+        // Only reset panel table if time slots changed, preserve existing data
+        setPanelTable(prev => {
+          const newTable = Array.from({ length: slots.length }, (_, rowIndex) => {
+            const existingRow = prev[rowIndex] || [];
+            return Array.from({ length: numPanels }, (_, colIndex) => 
+              existingRow[colIndex] || null
+            );
+          });
+          return newTable;
+        });
       }
     } catch (error) {
       console.error('Error fetching duration config:', error);
       // Fallback to default time slots
       const defaultSlots = ['8:00', '8:10', '8:20', '8:30', '8:40'];
       setTimeSlots(defaultSlots);
-      setPanelTable(Array.from({ length: defaultSlots.length }, () => Array(numPanels).fill(null)));
+      setPanelTable(prev => {
+        const newTable = Array.from({ length: defaultSlots.length }, (_, rowIndex) => {
+          const existingRow = prev[rowIndex] || [];
+          return Array.from({ length: numPanels }, (_, colIndex) => 
+            existingRow[colIndex] || null
+          );
+        });
+        return newTable;
+      });
     }
   };
 
