@@ -150,6 +150,34 @@ export const PanelTable = () => {
     }
   };
 
+  // Add collision detection function
+  const detectCollisions = () => {
+    const collisions = new Set();
+    
+    panelTable.forEach((row, rowIndex) => {
+      const teamIds = {};
+      row.forEach((cell, colIndex) => {
+        if (cell && cell.uniqueId) {
+          const parts = cell.uniqueId.split('-');
+          if (parts.length >= 2) {
+            const teamId = parts[1]; // Extract teamId from uniqueId
+            
+            if (teamIds[teamId] !== undefined) {
+              // Mark both cells as collisions
+              collisions.add(`${rowIndex}-${teamIds[teamId]}`);
+              collisions.add(`${rowIndex}-${colIndex}`);
+            } else {
+              teamIds[teamId] = colIndex;
+            }
+          }
+        }
+      });
+    });
+    return collisions;
+  };
+
+  const collisions = detectCollisions();
+
   return (
     <div className="ps-card" style={{ width: '50vw', height: '80vh', display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
       <div className="ps-section-title" style={{ flexShrink: 0 }}>PANEL TABLE</div>
@@ -190,43 +218,68 @@ export const PanelTable = () => {
                 <td style={{ width: '60px', height: '50px', fontWeight: 'bold', position: 'sticky', left: 0, background: 'white', zIndex: 1 }}>
                   {timeSlots[r] || ''}
                 </td>
-                {rowData.map((cell, i) => (
-                  <td
-                    key={i}
-                    style={{ width: '150px', height: '50px', fontSize: '12px', padding: '4px', position: 'relative' }}
-                    draggable={!!cell}
-                    onDragStart={(e) => handleDragStart(e, r, i)}
-                    onDrop={(e) => handleDrop(e, r, i)}
-                    onDragOver={handleDragOver}
-                  >
-                    {cell ? (
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <div>
-                          <div style={{ fontWeight: 'bold' }}>{cell.teamName}</div>
-                          <div style={{ fontSize: '10px', color: '#666' }}>{cell.uniqueId}</div>
+                {rowData.map((cell, i) => {
+                  const hasCollision = collisions.has(`${r}-${i}`);
+                  return (
+                    <td
+                      key={i}
+                      style={{ 
+                        width: '150px', 
+                        height: '50px', 
+                        fontSize: '12px', 
+                        padding: '4px', 
+                        position: 'relative',
+                        backgroundColor: hasCollision ? '#ffcccc' : 'transparent',
+                        border: hasCollision ? '2px solid red' : 'none'
+                      }}
+                      draggable={!!cell}
+                      onDragStart={(e) => handleDragStart(e, r, i)}
+                      onDrop={(e) => handleDrop(e, r, i)}
+                      onDragOver={handleDragOver}
+                    >
+                      {cell ? (
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                            <div>
+                              <div style={{ fontWeight: 'bold' }}>{cell.teamName}</div>
+                              <div style={{ fontSize: '10px', color: '#666' }}>{cell.uniqueId}</div>
+                            </div>
+                            <button
+                              onClick={() => removeTeam(r, i)}
+                              style={{
+                                background: 'red',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '50%',
+                                width: '20px',
+                                height: '20px',
+                                cursor: 'pointer',
+                                fontSize: '12px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                              }}
+                            >
+                              ×
+                            </button>
+                          </div>
+                          {hasCollision && (
+                            <div style={{ 
+                              fontSize: '8px', 
+                              color: 'red', 
+                              fontWeight: 'bold',
+                              marginTop: '2px',
+                              backgroundColor: 'yellow',
+                              padding: '1px 3px'
+                            }}>
+                              COLLISION
+                            </div>
+                          )}
                         </div>
-                        <button
-                          onClick={() => removeTeam(r, i)}
-                          style={{
-                            background: 'red',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '50%',
-                            width: '20px',
-                            height: '20px',
-                            cursor: 'pointer',
-                            fontSize: '12px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                          }}
-                        >
-                          ×
-                        </button>
-                      </div>
-                    ) : ''}
-                  </td>
-                ))}
+                      ) : ''}
+                    </td>
+                  );
+                })}
               </tr>
             ))}
           </tbody>
