@@ -20,9 +20,11 @@ export const DurationControl = () => {
       });
       
       if (response.ok) {
-        console.log('Duration configuration saved successfully');
+        // Dispatch event to update PanelTable
+        window.dispatchEvent(new CustomEvent('durationUpdated'));
       } else {
-        console.error('Failed to save duration configuration');
+        const errorData = await response.json();
+        console.error('Failed to save duration configuration:', errorData.error);
       }
     } catch (error) {
       console.error('Error saving duration configuration:', error);

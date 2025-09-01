@@ -66,14 +66,14 @@ export const TeamTable = () => {
   }
 
   return (
-    <div className="ps-card" style={{ width: '50vw', height: '80vh', display: 'flex', flexDirection: 'column' }}>
+    <div className="ps-card" style={{ width: '50vw', height: '80vh', display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
       <div className="ps-section-title" style={{ flexShrink: 0 }}>TEAM TABLE</div>
-      <div style={{ overflow: 'auto', flex: 1 }}>
-        <table className="ps-table" style={{ tableLayout: 'fixed' }}>
+      <div style={{ overflowX: 'auto', overflowY: 'auto', flex: 1 }}>
+        <table className="ps-table" style={{ tableLayout: 'fixed', minWidth: '2100px' }}>
           <thead style={{ position: 'sticky', top: 0, background: 'white', zIndex: 1 }}>
             <tr>
               {themeNames.map((theme, index) => (
-                <th key={index} style={{ width: '200px', height: '50px' }}>{theme}</th>
+                <th key={index} style={{ width: '150px', height: '50px' }}>{theme}</th>
               ))}
             </tr>
           </thead>
@@ -83,7 +83,7 @@ export const TeamTable = () => {
                 {rowData.map((cell, i) => (
                   <td
                     key={i}
-                    style={{ width: '200px', height: '50px', fontSize: '12px', padding: '4px' }}
+                    style={{ width: '150px', height: '50px', fontSize: '12px', padding: '4px' }}
                     draggable={!!cell}
                     onDragStart={(e) => handleDragStart(e, r, i)}
                   >

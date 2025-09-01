@@ -15,7 +15,6 @@ export async function teamsFetcher(req, res) {
         } else if (data && data.teams && Array.isArray(data.teams)) {
             teams = data.teams;
         } else {
-            console.log('Invalid data structure received:', data);
             return res.json({
                 themeName: theme,
                 teams: []

@@ -7,12 +7,16 @@ import { dirname } from 'path';
 import fs from 'fs';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Enable CORS for frontend requests
 app.use(cors());
+app.use(express.json()); // Add this line to parse JSON bodies
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
