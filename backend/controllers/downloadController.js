@@ -45,7 +45,6 @@ export async function downloadTheme(req, res) {
         }
         res.setHeader('Content-Type', 'text/csv');
         res.setHeader('Content-Disposition', `attachment; filename="all.csv"`);
-        console.log(allCsv)
         res.write(allCsv);
         res.end();
       } 
@@ -57,19 +56,6 @@ export async function downloadTheme(req, res) {
   }
 }
 
-/*export async function download() {
-  const theme = "MedTech / BioTech / HealthTech";
-  try {
-    const data = await themeTeamFetch(theme);
-    const csv = arrayToCsv(data);
-    //res.setHeader('Content-Type', 'text/csv');
-    //res.setHeader('Content-Disposition', `attachment; filename="${theme}.csv"`);
-    console.log(csv);
-  } catch (error) {
-    //res.status(500).json({ error: error.message });
-  }
-}
-download();*/
 export async function downloadAllThemes(req, res) {
   try {
     const themes = [
@@ -102,7 +88,6 @@ export async function downloadAllThemes(req, res) {
     }
     res.setHeader('Content-Type', 'text/csv');
     res.setHeader('Content-Disposition', `attachment; filename="all.csv"`);
-    console.log(allCsv)
     res.write(allCsv);
     res.end();
   } catch (error) {
@@ -140,9 +125,7 @@ export async function downloadAll() {
         allCsv += '\n'+ csv;
       }
     }
-    console.log(allCsv)
   } catch (error) {
     console.log(error.message);
   }
 }
-downloadAll();
