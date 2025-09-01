@@ -47,7 +47,7 @@ const fetchTheme = async (problemStatementId) => {
  * @returns {Promise<Array>} - The parsed CSV data with added theme column
  */
 const parseCSVToTable = async (file) => {
-  console.log('Parsing CSV file:', file.originalname);
+  
   
   // Create a readable stream from the file buffer
   const bufferStream = fs.createReadStream(file.path);
@@ -99,13 +99,9 @@ const parseCSVToTable = async (file) => {
     parsedCSV.push([row.teamId, row.teamName, row.problemStatementId, theme]);
   }
   
-  console.log('First 5 rows of the processed CSV file:');
-  console.log(parsedCSV.slice(0, 6)); // Header + 5 rows
-  
   // Upload the parsed CSV data to the database
   try {
     const result = await uploadTeamsCSV(parsedCSV);
-    console.log('Database upload result:', result);
   } catch (error) {
     console.error('Error uploading to database:', error);
     throw new Error(`Failed to upload to database: ${error.message}`);

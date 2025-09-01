@@ -3,29 +3,59 @@ import React, { useState, useEffect } from 'react';
 export const PanelTable = () => {
   const [panelTable, setPanelTable] = useState([]);
   const [timeSlots, setTimeSlots] = useState([]);
+  const [numPanels, setNumPanels] = useState(4);
+  const [selectMode, setSelectMode] = useState(false);
+  const [selectedCells, setSelectedCells] = useState(new Set());
+
+  const fetchDurationConfig = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/duration');
+      if (response.ok) {
+        const config = await response.json();
+        const slots = generateTimeSlots(config.startTime, config.endTime, config.duration);
+        setTimeSlots(slots);
+        
+        // Only reset panel table if time slots changed, preserve existing data
+        setPanelTable(prev => {
+          const newTable = Array.from({ length: slots.length }, (_, rowIndex) => {
+            const existingRow = prev[rowIndex] || [];
+            return Array.from({ length: numPanels }, (_, colIndex) => 
+              existingRow[colIndex] || null
+            );
+          });
+          return newTable;
+        });
+      }
+    } catch (error) {
+      console.error('Error fetching duration config:', error);
+      // Fallback to default time slots
+      const defaultSlots = ['8:00', '8:10', '8:20', '8:30', '8:40'];
+      setTimeSlots(defaultSlots);
+      setPanelTable(prev => {
+        const newTable = Array.from({ length: defaultSlots.length }, (_, rowIndex) => {
+          const existingRow = prev[rowIndex] || [];
+          return Array.from({ length: numPanels }, (_, colIndex) => 
+            existingRow[colIndex] || null
+          );
+        });
+        return newTable;
+      });
+    }
+  };
 
   useEffect(() => {
-    // Fetch duration configuration and generate time slots
-    const fetchDurationConfig = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/duration');
-        if (response.ok) {
-          const config = await response.json();
-          const slots = generateTimeSlots(config.startTime, config.endTime, config.duration);
-          setTimeSlots(slots);
-          setPanelTable(Array.from({ length: slots.length }, () => Array(4).fill(null)));
-        }
-      } catch (error) {
-        console.error('Error fetching duration config:', error);
-        // Fallback to default time slots
-        const defaultSlots = ['8:00', '8:10', '8:20', '8:30', '8:40'];
-        setTimeSlots(defaultSlots);
-        setPanelTable(Array.from({ length: defaultSlots.length }, () => Array(4).fill(null)));
-      }
+    fetchDurationConfig();
+
+    const handleDurationUpdate = () => {
+      fetchDurationConfig();
     };
 
-    fetchDurationConfig();
-  }, []);
+    window.addEventListener('durationUpdated', handleDurationUpdate);
+
+    return () => {
+      window.removeEventListener('durationUpdated', handleDurationUpdate);
+    };
+  }, [numPanels]); // Add numPanels to dependencies to refetch when panels change
 
   const generateTimeSlots = (startTime, endTime, duration) => {
     const slots = [];
@@ -35,7 +65,10 @@ export const PanelTable = () => {
     let current = new Date(start);
     
     while (current < end) {
-      const timeString = current.toTimeString().slice(0, 5);
+      const hours = current.getHours();
+      const minutes = current.getMinutes();
+      const displayHours = hours % 12 || 12;
+      const timeString = `${displayHours}:${String(minutes).padStart(2, '0')}`;
       slots.push(timeString);
       current.setMinutes(current.getMinutes() + duration);
     }
@@ -57,79 +90,313 @@ export const PanelTable = () => {
     const data = JSON.parse(e.dataTransfer.getData('text/plain'));
     const newTable = [...panelTable];
     
-    // If there's existing content, shift it and following elements down
-    if (newTable[row][col] !== null) {
-      // Find the next available slot in the column
-      let insertRow = row;
-      while (insertRow < newTable.length && newTable[insertRow][col] !== null) {
-        insertRow++;
+    if (data.type === 'column') {
+      // Handle column drop - place teams vertically starting from the drop position
+      data.content.forEach((team, index) => {
+        const targetRow = row + index;
+        
+        // Extend table if needed
+        while (targetRow >= newTable.length) {
+          newTable.push(Array(numPanels).fill(null));
+        }
+        
+        // If there's existing content, shift it
+        if (newTable[targetRow][col] !== null) {
+          let insertRow = targetRow;
+          while (insertRow < newTable.length && newTable[insertRow][col] !== null) {
+            insertRow++;
+          }
+          
+          if (insertRow >= newTable.length) {
+            newTable.push(Array(numPanels).fill(null));
+          }
+          
+          for (let i = insertRow; i > targetRow; i--) {
+            newTable[i][col] = newTable[i - 1][col];
+          }
+        }
+        
+        newTable[targetRow][col] = team;
+        
+        // Notify TeamTable that teams are now used
+        if (team) {
+          window.dispatchEvent(new CustomEvent('teamUsed', { 
+            detail: { uniqueId: team.uniqueId } 
+          }));
+        }
+      });
+    } else {
+      // Handle single cell drop (existing logic)
+      if (newTable[row][col] !== null) {
+        let insertRow = row;
+        while (insertRow < newTable.length && newTable[insertRow][col] !== null) {
+          insertRow++;
+        }
+        
+        if (insertRow < newTable.length) {
+          for (let i = insertRow; i > row; i--) {
+            newTable[i][col] = newTable[i - 1][col];
+          }
+        } else {
+          const newRow = Array(numPanels).fill(null);
+          newTable.push(newRow);
+          for (let i = newTable.length - 1; i > row; i--) {
+            newTable[i][col] = newTable[i - 1][col];
+          }
+        }
       }
       
-      // If we found a slot, shift elements down
-      if (insertRow < newTable.length) {
-        for (let i = insertRow; i > row; i--) {
-          newTable[i][col] = newTable[i - 1][col];
-        }
-      } else {
-        // No space available, extend the table
-        const newRow = Array(4).fill(null);
-        newTable.push(newRow);
-        for (let i = newTable.length - 1; i > row; i--) {
-          newTable[i][col] = newTable[i - 1][col];
-        }
+      newTable[row][col] = data.content;
+      
+      if (data.type === 'panel') {
+        newTable[data.row][data.col] = null; // Move: clear source
       }
-    }
-    
-    newTable[row][col] = data.content;
-    
-    if (data.type === 'panel') {
-      newTable[data.row][data.col] = null; // Move: clear source
+      
+      if (data.content && data.type === 'team') {
+        window.dispatchEvent(new CustomEvent('teamUsed', { 
+          detail: { uniqueId: data.content.uniqueId } 
+        }));
+      }
     }
     
     setPanelTable(newTable);
+  };
+
+  const handleCellClick = (row, col) => {
+    if (!selectMode || !panelTable[row][col]) return;
+    
+    const cellKey = `${row}-${col}`;
+    const newSelectedCells = new Set(selectedCells);
+    
+    if (newSelectedCells.has(cellKey)) {
+      newSelectedCells.delete(cellKey);
+    } else {
+      newSelectedCells.add(cellKey);
+    }
+    
+    setSelectedCells(newSelectedCells);
+  };
+
+  const deleteSelectedCells = () => {
+    const newTable = [...panelTable];
+    
+    selectedCells.forEach(cellKey => {
+      const [row, col] = cellKey.split('-').map(Number);
+      const removedTeam = newTable[row][col];
+      newTable[row][col] = null;
+      
+      // Notify TeamTable that team is no longer used
+      if (removedTeam) {
+        window.dispatchEvent(new CustomEvent('teamRemoved', { 
+          detail: { uniqueId: removedTeam.uniqueId } 
+        }));
+      }
+    });
+    
+    setPanelTable(newTable);
+    setSelectedCells(new Set());
+  };
+
+  const clearSelection = () => {
+    setSelectedCells(new Set());
   };
 
   const handleDragOver = (e) => {
     e.preventDefault();
   };
 
+  const addPanel = () => {
+    setNumPanels(prev => prev + 1);
+    setPanelTable(prev => prev.map(row => [...row, null]));
+  };
+
+  const removeTeam = (row, col) => {
+    const newTable = [...panelTable];
+    const removedTeam = newTable[row][col];
+    newTable[row][col] = null;
+    setPanelTable(newTable);
+
+    // Notify TeamTable that a team is no longer used
+    if (removedTeam) {
+      window.dispatchEvent(new CustomEvent('teamRemoved', { 
+        detail: { uniqueId: removedTeam.uniqueId } 
+      }));
+    }
+  };
+
+  // Add collision detection function
+  const detectCollisions = () => {
+    const collisions = new Set();
+    
+    panelTable.forEach((row, rowIndex) => {
+      const teamIds = {};
+      row.forEach((cell, colIndex) => {
+        if (cell && cell.uniqueId) {
+          const parts = cell.uniqueId.split('-');
+          if (parts.length >= 2) {
+            const teamId = parts[1]; // Extract teamId from uniqueId
+            
+            if (teamIds[teamId] !== undefined) {
+              // Mark both cells as collisions
+              collisions.add(`${rowIndex}-${teamIds[teamId]}`);
+              collisions.add(`${rowIndex}-${colIndex}`);
+            } else {
+              teamIds[teamId] = colIndex;
+            }
+          }
+        }
+      });
+    });
+    return collisions;
+  };
+
+  const collisions = detectCollisions();
+  const collisionCount = collisions.size;
+
+  const totalCells = numPanels * timeSlots.length;
+  const occupiedCells = panelTable.flat().filter(cell => cell !== null).length;
+
   return (
-    <div className="ps-card" style={{ height: '80vh', display: 'flex', flexDirection: 'column' }}>
-      <div className="ps-section-title" style={{ flexShrink: 0 }}>PANEL TABLE</div>
+    <div className="ps-card" style={{ 
+      width: 'calc(50vw - 6px)', 
+      height: '70vh', 
+      display: 'flex', 
+      flexDirection: 'column',
+      overflow: 'hidden'
+    }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+        <div className="ps-section-title" style={{ flexShrink: 0 }}>PANEL TABLE</div>
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          <button 
+            className={`ps-button ${selectMode ? 'primary' : ''}`}
+            onClick={() => {
+              setSelectMode(!selectMode);
+              if (selectMode) clearSelection();
+            }}
+            style={{ fontSize: '10px', padding: '4px 8px' }}
+          >
+            {selectMode ? 'Cancel' : 'Select'}
+          </button>
+          {selectMode && selectedCells.size > 0 && (
+            <button
+              className="ps-button"
+              onClick={deleteSelectedCells}
+              style={{ 
+                fontSize: '10px', 
+                padding: '4px 8px',
+                background: 'var(--error)',
+                color: 'white'
+              }}
+            >
+              Delete ({selectedCells.size})
+            </button>
+          )}
+        </div>
+      </div>
+      <div className="stats-bar" style={{ 
+        display: 'flex',
+        justifyContent: 'space-between',
+        margin: '4px 0',
+        fontSize: '11px',
+        padding: '6px 12px'
+      }}>
+        <span>Total: <strong>{totalCells}</strong></span>
+        <span>Occupied: <strong>{occupiedCells}</strong></span>
+        {selectMode && <span>Selected: <strong>{selectedCells.size}</strong></span>}
+      </div>
+      {collisionCount > 0 && (
+        <div className="collision-warning" style={{ margin: '4px 0', padding: '6px 12px', fontSize: '12px' }}>
+          ⚠️ Warning: {collisionCount/2} collision(s) detected
+        </div>
+      )}
       <div style={{ overflow: 'auto', flex: 1 }}>
-        <table className="ps-table">
-          <thead style={{ position: 'sticky', top: 0, background: 'white', zIndex: 1 }}>
+        <table className="ps-table" style={{ 
+          tableLayout: 'fixed', 
+          minWidth: `${150 * numPanels + 60}px`,
+          borderCollapse: 'collapse'
+        }}>
+          <thead style={{ position: 'sticky', top: 0, background: 'var(--panel)', zIndex: 1 }}>
             <tr>
-              <th style={{ width: '200px', height: '50px' }}>TIME</th>
-              <th style={{ width: '200px', height: '50px' }}>PANEL 1</th>
-              <th style={{ width: '200px', height: '50px' }}>PANEL 2</th>
-              <th style={{ width: '200px', height: '50px' }}>PANEL 3</th>
-              <th style={{ width: '200px', height: '50px' }}>PANEL 4</th>
+              <th style={{ 
+                width: '60px', 
+                height: '50px', 
+                position: 'sticky', 
+                left: 0, 
+                background: 'var(--panel)', 
+                zIndex: 2
+              }}>
+                <button className="add-panel-button" onClick={addPanel}>
+                  +
+                </button>
+              </th>
+              {Array.from({ length: numPanels }, (_, i) => (
+                <th key={i} style={{ width: '150px', height: '50px' }}>
+                  PANEL {i + 1}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
             {panelTable.map((rowData, r) => (
               <tr key={r}>
-                <td style={{ width: '200px', height: '50px', fontWeight: 'bold' }}>
+                <td style={{ 
+                  width: '60px', 
+                  height: '50px', 
+                  fontWeight: 'bold', 
+                  position: 'sticky', 
+                  left: 0, 
+                  background: 'var(--panel)', 
+                  zIndex: 1,
+                  textAlign: 'center'
+                }}>
                   {timeSlots[r] || ''}
                 </td>
-                {rowData.map((cell, i) => (
-                  <td
-                    key={i}
-                    style={{ width: '200px', height: '50px', fontSize: '12px', padding: '4px' }}
-                    draggable={!!cell}
-                    onDragStart={(e) => handleDragStart(e, r, i)}
-                    onDrop={(e) => handleDrop(e, r, i)}
-                    onDragOver={handleDragOver}
-                  >
-                    {cell ? (
-                      <div>
-                        <div style={{ fontWeight: 'bold' }}>{cell.teamName}</div>
-                        <div style={{ fontSize: '10px', color: '#666' }}>{cell.uniqueId}</div>
-                      </div>
-                    ) : ''}
-                  </td>
-                ))}
+                {rowData.map((cell, i) => {
+                  const hasCollision = collisions.has(`${r}-${i}`);
+                  const isSelected = selectedCells.has(`${r}-${i}`);
+                  return (
+                    <td
+                      key={i}
+                      style={{ 
+                        width: '150px', 
+                        height: '50px', 
+                        fontSize: '12px', 
+                        padding: '8px', 
+                        position: 'relative',
+                        backgroundColor: isSelected ? 'var(--accent)' : (hasCollision ? 'var(--error-bg)' : 'transparent'),
+                        borderColor: isSelected ? 'var(--accent-hover)' : (hasCollision ? 'var(--error)' : 'var(--border)'),
+                        borderWidth: (isSelected || hasCollision) ? '2px' : '1px',
+                        cursor: selectMode ? 'pointer' : 'default'
+                      }}
+                      draggable={!selectMode && !!cell}
+                      onDragStart={(e) => !selectMode && handleDragStart(e, r, i)}
+                      onDrop={(e) => !selectMode && handleDrop(e, r, i)}
+                      onDragOver={!selectMode ? handleDragOver : undefined}
+                      onClick={() => handleCellClick(r, i)}
+                    >
+                      {cell ? (
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '4px' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                            <div>
+                              <div className="team-cell">{cell.teamName}</div>
+                              <div className="team-id">{cell.uniqueId}</div>
+                            </div>
+                            {!selectMode && (
+                              <button className="remove-button" onClick={() => removeTeam(r, i)}>
+                                ×
+                              </button>
+                            )}
+                          </div>
+                          {hasCollision && (
+                            <div className="collision-indicator">
+                              COLLISION
+                            </div>
+                          )}
+                        </div>
+                      ) : ''}
+                    </td>
+                  );
+                })}
               </tr>
             ))}
           </tbody>

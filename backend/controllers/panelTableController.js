@@ -6,6 +6,10 @@ let durationConfig = {
 
 export async function saveDurationConfig(req, res) {
   try {
+    if (!req.body) {
+      return res.status(400).json({ error: 'Request body is required. Ensure body parser middleware is set up.' });
+    }
+    
     const { startTime, endTime, duration } = req.body;
     
     if (!startTime || !endTime || !duration) {
@@ -13,7 +17,6 @@ export async function saveDurationConfig(req, res) {
     }
     
     durationConfig = { startTime, endTime, duration };
-    console.log('Duration config saved:', durationConfig);
     
     res.json({ message: 'Duration configuration saved successfully', config: durationConfig });
   } catch (error) {
