@@ -6,7 +6,7 @@ export const ThemeDownloadControls = () => {
 
   const handleDownloadTheme = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/download/${encodeURIComponent(selectedTheme)}`);
+      const res = await fetch(`http://localhost:5000/api/download/${encodeURIComponent(selectedTheme)}` || `https://panel-splitter-1.onrender.com/api/download/${encodeURIComponent(selectedTheme)}`);
       if (!res.ok) throw new Error('Download failed');
       const blob = await res.blob();
       console.log(blob)
@@ -25,7 +25,7 @@ export const ThemeDownloadControls = () => {
 
   const handleDownloadAll = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/bro/all`);
+      const res = await fetch(`http://localhost:5000/api/bro/all`  || `https://panel-splitter-1.onrender.com/api/bro/all`);
       if (!res.ok) throw new Error('Download failed');
       const blob = await res.blob();
       console.log(blob)

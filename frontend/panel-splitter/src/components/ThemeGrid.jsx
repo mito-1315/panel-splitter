@@ -47,7 +47,7 @@ export const ThemeGrid = () => {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch(`http://localhost:5000/api/themes/${encodeURIComponent(themeName)}`);
+      const res = await fetch(`http://localhost:5000/api/themes/${encodeURIComponent(themeName)}` || `https://panel-splitter-1.onrender.com/api/themes/${encodeURIComponent(themeName)}`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const json = await res.json();
       // Convert data to { header, rows } if needed

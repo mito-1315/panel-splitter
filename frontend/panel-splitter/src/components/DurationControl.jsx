@@ -7,7 +7,7 @@ export const DurationControl = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/duration', {
+      const response = await fetch('http://localhost:5000/api/duration' || 'https://panel-splitter-1.onrender.com/api/duration', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
