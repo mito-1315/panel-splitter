@@ -1,5 +1,4 @@
 import { themeTeamFetch } from "../service/themeDisplayService.js";
-
 export async function teamsFetcher(req, res) {
     const theme = req.params.themename;
     if (!theme) {
@@ -31,18 +30,11 @@ export async function teamsFetcher(req, res) {
         const transformedData = {
             themeName: theme,
             teams: teams.map(team => {
-                // Generate unique random number
-                let randomNumber;
-                do {
-                    randomNumber = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
-                } while (existingRandomNumbers.has(randomNumber));
-                
-                existingRandomNumbers.add(randomNumber);
-                
                 return {
-                    uniqueId: `${themeIndexStr}-${team.teamId}-${randomNumber}`,
+                    uniqueId: team.id,
                     teamName: team.teamName,
-                    teamId: team.teamId.toString()
+                    teamId: team.teamId.toString(),
+                    problemStatement: team.problemStatementId || ''
                 };
             })
         };

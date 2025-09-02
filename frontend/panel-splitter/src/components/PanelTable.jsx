@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 export const PanelTable = () => {
   const [panelTable, setPanelTable] = useState([]);
@@ -7,7 +7,26 @@ export const PanelTable = () => {
   const [selectMode, setSelectMode] = useState(false);
   const [selectedCells, setSelectedCells] = useState(new Set());
 
-  const fetchDurationConfig = async () => {
+  const generateTimeSlots = useCallback((startTime, endTime, duration) => {
+    const slots = [];
+    const start = new Date(`1970-01-01T${startTime}:00`);
+    const end = new Date(`1970-01-01T${endTime}:00`);
+    
+    let current = new Date(start);
+    
+    while (current < end) {
+      const hours = current.getHours();
+      const minutes = current.getMinutes();
+      const displayHours = hours % 12 || 12;
+      const timeString = `${displayHours}:${String(minutes).padStart(2, '0')}`;
+      slots.push(timeString);
+      current.setMinutes(current.getMinutes() + duration);
+    }
+    
+    return slots;
+  }, []);
+
+  const fetchDurationConfig = useCallback(async () => {
     try {
       const response = await fetch('http://localhost:5000/api/duration' || 'https://panel-splitter-1.onrender.com/api/duration');
       if (response.ok) {
@@ -41,7 +60,7 @@ export const PanelTable = () => {
         return newTable;
       });
     }
-  };
+  }, [numPanels, generateTimeSlots]);
 
   useEffect(() => {
     fetchDurationConfig();
@@ -55,26 +74,7 @@ export const PanelTable = () => {
     return () => {
       window.removeEventListener('durationUpdated', handleDurationUpdate);
     };
-  }, [numPanels]); // Add numPanels to dependencies to refetch when panels change
-
-  const generateTimeSlots = (startTime, endTime, duration) => {
-    const slots = [];
-    const start = new Date(`1970-01-01T${startTime}:00`);
-    const end = new Date(`1970-01-01T${endTime}:00`);
-    
-    let current = new Date(start);
-    
-    while (current < end) {
-      const hours = current.getHours();
-      const minutes = current.getMinutes();
-      const displayHours = hours % 12 || 12;
-      const timeString = `${displayHours}:${String(minutes).padStart(2, '0')}`;
-      slots.push(timeString);
-      current.setMinutes(current.getMinutes() + duration);
-    }
-    
-    return slots;
-  };
+  }, [fetchDurationConfig]); // Include fetchDurationConfig in dependencies
 
   const handleDragStart = (e, row, col) => {
     e.dataTransfer.setData('text/plain', JSON.stringify({
@@ -206,7 +206,14 @@ export const PanelTable = () => {
   };
 
   const addPanel = () => {
-    setNumPanels(prev => prev + 1);
+    setNumPanels(prev => {
+      const newNum = prev + 1;
+      // Dispatch event to notify other components of the change
+      window.dispatchEvent(new CustomEvent('numPanelsChanged', { 
+        detail: { numPanels: newNum } 
+      }));
+      return newNum;
+    });
     setPanelTable(prev => prev.map(row => [...row, null]));
   };
 
