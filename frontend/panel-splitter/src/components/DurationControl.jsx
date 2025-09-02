@@ -4,6 +4,7 @@ export const DurationControl = () => {
   const [startTime, setStartTime] = useState('08:00');
   const [endTime, setEndTime] = useState('17:00');
   const [duration, setDuration] = useState(10);
+  const [hasExistingCells, setHasExistingCells] = useState(false);
 
   useEffect(() => {
     const fetchDurationConfig = async () => {
@@ -27,6 +28,9 @@ export const DurationControl = () => {
           const panelsData = await response.json();
           if (panelsData && panelsData.length > 0) {
             setDuration(panelsData[0].duration);
+            setHasExistingCells(true);
+          } else {
+            setHasExistingCells(false);
           }
         }
       } catch (error) {
@@ -36,6 +40,17 @@ export const DurationControl = () => {
 
     fetchDurationConfig();
     fetchPanelDuration();
+
+    // Listen for panel changes to update the disabled state
+    const handlePanelUpdate = () => {
+      fetchPanelDuration();
+    };
+
+    window.addEventListener('panelTableUpdated', handlePanelUpdate);
+
+    return () => {
+      window.removeEventListener('panelTableUpdated', handlePanelUpdate);
+    };
   }, []);
 
   const handleSubmit = async () => {
@@ -45,11 +60,7 @@ export const DurationControl = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          startTime,
-          endTime,
-          duration
-        })
+        body: JSON.stringify({ startTime, endTime, duration })
       });
       
       if (response.ok) {
@@ -72,6 +83,7 @@ export const DurationControl = () => {
         className="ps-input" 
         value={startTime}
         onChange={(e) => setStartTime(e.target.value)}
+        disabled={hasExistingCells}
       />
       
       <span className="ps-section-title">End Time:</span>
@@ -80,6 +92,7 @@ export const DurationControl = () => {
         className="ps-input" 
         value={endTime}
         onChange={(e) => setEndTime(e.target.value)}
+        disabled={hasExistingCells}
       />
       
       <span className="ps-section-title">Duration per Idea Pitch:</span>
@@ -89,12 +102,28 @@ export const DurationControl = () => {
         type="number"
         value={duration}
         onChange={(e) => setDuration(Number(e.target.value))}
+        disabled={hasExistingCells}
       />
       <span className="ps-section-title">minutes</span>
       
-      <button className="ps-button primary" onClick={handleSubmit}>
+      <button 
+        className="ps-button primary" 
+        onClick={handleSubmit}
+        disabled={hasExistingCells}
+        style={{
+          opacity: hasExistingCells ? 0.5 : 1,
+          cursor: hasExistingCells ? 'not-allowed' : 'pointer'
+        }}
+        title={hasExistingCells ? 'Clear panel table to change schedule' : 'Set Schedule'}
+      >
         Set Schedule
       </button>
+      
+      {hasExistingCells && (
+        <span style={{ fontSize: '11px', color: 'var(--error)', marginLeft: '8px' }}>
+          Clear panel table to modify schedule
+        </span>
+      )}
     </div>
   );
 };

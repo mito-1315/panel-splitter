@@ -43,7 +43,7 @@ export const TeamTable = () => {
       
       setTeamTable(newTable);
       
-      // Fetch existing panels to mark teams as used
+      // Fetch existing panels to mark teams as used - only on initial load
       await fetchPanels();
       
       setLoading(false);
@@ -65,6 +65,7 @@ export const TeamTable = () => {
       }
     };
 
+    // Only fetch on initial component mount
     fetchTeamData();
 
     // Load used teams from localStorage
@@ -84,12 +85,19 @@ export const TeamTable = () => {
       setUsedTeams(prev => prev.filter(id => id !== e.detail.uniqueId));
     };
 
+    const handleClearAllPanels = () => {
+      setUsedTeams([]);
+      localStorage.removeItem('usedTeams');
+    };
+
     window.addEventListener('teamUsed', handleTeamUsed);
     window.addEventListener('teamRemoved', handleTeamRemoved);
+    window.addEventListener('clearAllPanels', handleClearAllPanels);
 
     return () => {
       window.removeEventListener('teamUsed', handleTeamUsed);
       window.removeEventListener('teamRemoved', handleTeamRemoved);
+      window.removeEventListener('clearAllPanels', handleClearAllPanels);
     };
   }, []);
 
@@ -110,6 +118,10 @@ export const TeamTable = () => {
 
   const handleCellClick = (row, col) => {
     if (!selectMode || !teamTable[row][col]) return;
+    
+    // Don't allow selection of cells that are in use
+    const cell = teamTable[row][col];
+    if (usedTeams.includes(cell.uniqueId)) return;
     
     const cellKey = `${row}-${col}`;
     const newSelectedCells = new Set(selectedCells);
@@ -135,6 +147,12 @@ export const TeamTable = () => {
       type: 'column',
       content: selectedTeams
     }));
+    
+    // Auto-unselect after drag starts
+    setTimeout(() => {
+      setSelectedCells(new Set());
+      setSelectMode(false);
+    }, 100);
   };
 
   const clearSelection = () => {
@@ -164,8 +182,8 @@ export const TeamTable = () => {
       overflow: 'hidden'
     }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-        <div className="ps-section-title" style={{ flexShrink: 0 }}>TEAM TABLE</div>
-        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div className="ps-section-title" style={{ flexShrink: 0 }}>TEAM TABLE</div>
           <button 
             className={`ps-button ${selectMode ? 'primary' : ''}`}
             onClick={() => {
@@ -235,7 +253,7 @@ export const TeamTable = () => {
                         fontSize: '12px', 
                         padding: '8px',
                         opacity: isUsed ? 0.5 : 1,
-                        cursor: selectMode ? 'pointer' : (isUsed ? 'not-allowed' : (cell ? 'grab' : 'default')),
+                        cursor: selectMode ? (isUsed ? 'not-allowed' : 'pointer') : (isUsed ? 'not-allowed' : (cell ? 'grab' : 'default')),
                         backgroundColor: isSelected ? 'var(--accent)' : 'transparent',
                         border: isSelected ? '2px solid var(--accent-hover)' : '1px solid var(--border)'
                       }}

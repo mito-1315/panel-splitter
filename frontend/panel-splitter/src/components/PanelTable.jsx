@@ -7,6 +7,7 @@ export const PanelTable = () => {
   const [selectMode, setSelectMode] = useState(false);
   const [selectedCells, setSelectedCells] = useState(new Set());
   const [duration, setDuration] = useState(10); // Add duration state
+  const [showSaveSuccess, setShowSaveSuccess] = useState(false);
 
   const generateTimeSlots = useCallback((startTime, endTime, duration) => {
     const slots = [];
@@ -37,15 +38,21 @@ export const PanelTable = () => {
           // Set duration from first panel data
           setDuration(panelsData[0].duration);
           
+          // Find maximum panel number to set initial numPanels
+          const maxPanel = Math.max(...panelsData.map(panel => panel.panel));
+          if (maxPanel > numPanels) {
+            setNumPanels(maxPanel);
+          }
+          
           // Create new panel table with existing data
-          const newTable = Array.from({ length: slots.length }, () => Array(numPanels).fill(null));
+          const newTable = Array.from({ length: slots.length }, () => Array(Math.max(numPanels, maxPanel)).fill(null));
           const usedTeamIds = [];
           
           panelsData.forEach(panel => {
             const timeIndex = slots.indexOf(panel.time);
             const panelIndex = panel.panel - 1; // Convert to 0-based index
             
-            if (timeIndex !== -1 && panelIndex >= 0 && panelIndex < numPanels) {
+            if (timeIndex !== -1 && panelIndex >= 0 && panelIndex < Math.max(numPanels, maxPanel)) {
               const uniqueId = `${panel.teamsDataId}-${panel.teamId}`;
               const cellData = {
                 teamName: panel.teamName,
@@ -84,7 +91,7 @@ export const PanelTable = () => {
         const slots = generateTimeSlots(config.startTime, config.endTime, config.duration);
         setTimeSlots(slots);
         
-        // Only reset panel table if time slots changed, preserve existing data
+        // Only reset panel table structure, don't fetch panels here
         setPanelTable(prev => {
           const newTable = Array.from({ length: slots.length }, (_, rowIndex) => {
             const existingRow = prev[rowIndex] || [];
@@ -94,9 +101,6 @@ export const PanelTable = () => {
           });
           return newTable;
         });
-        
-        // Fetch existing panels after setting up the table structure
-        await fetchPanels(slots);
       }
     } catch (error) {
       console.error('Error fetching duration config:', error);
@@ -112,25 +116,50 @@ export const PanelTable = () => {
         });
         return newTable;
       });
-      
-      // Try to fetch panels with default slots
-      await fetchPanels(defaultSlots);
     }
   }, [numPanels, generateTimeSlots]);
 
   useEffect(() => {
-    fetchDurationConfig();
+    // Initial load: fetch duration config and panels
+    const initialLoad = async () => {
+      await fetchDurationConfig();
+      // Only fetch panels on initial load
+      const slots = timeSlots.length > 0 ? timeSlots : ['8:00', '8:10', '8:20', '8:30', '8:40'];
+      await fetchPanels(slots);
+    };
+
+    initialLoad();
 
     const handleDurationUpdate = () => {
-      fetchDurationConfig();
+      fetchDurationConfig(); // Only fetch duration config, not panels
+    };
+
+    const handleClearAllPanels = () => {
+      // Clear the panel table completely
+      setPanelTable(prev => {
+        const newTable = Array.from({ length: timeSlots.length || prev.length }, () => Array(numPanels).fill(null));
+        return newTable;
+      });
+      
+      // Clear selection if in select mode
+      setSelectedCells(new Set());
+    };
+
+    const handleDeleteAllCells = () => {
+      // Use the same functionality as the Delete All button
+      deleteAllCells();
     };
 
     window.addEventListener('durationUpdated', handleDurationUpdate);
+    window.addEventListener('clearAllPanels', handleClearAllPanels);
+    window.addEventListener('deleteAllCells', handleDeleteAllCells);
 
     return () => {
       window.removeEventListener('durationUpdated', handleDurationUpdate);
+      window.removeEventListener('clearAllPanels', handleClearAllPanels);
+      window.removeEventListener('deleteAllCells', handleDeleteAllCells);
     };
-  }, [fetchDurationConfig]); // Include fetchDurationConfig in dependencies
+  }, [fetchDurationConfig, timeSlots.length, numPanels]);
 
   const handleDragStart = (e, row, col) => {
     e.dataTransfer.setData('text/plain', JSON.stringify({
@@ -253,6 +282,37 @@ export const PanelTable = () => {
     setSelectedCells(new Set());
   };
 
+  const deleteAllCells = () => {
+    // Get all occupied cells to notify TeamTable
+    const occupiedCells = [];
+    panelTable.forEach((row, rowIndex) => {
+      row.forEach((cell, colIndex) => {
+        if (cell && cell.uniqueId) {
+          occupiedCells.push(cell.uniqueId);
+        }
+      });
+    });
+
+    // Clear the entire panel table
+    setPanelTable(prev => {
+      const newTable = Array.from({ length: prev.length }, () => Array(numPanels).fill(null));
+      return newTable;
+    });
+
+    // Clear selection if in select mode
+    setSelectedCells(new Set());
+
+    // Notify TeamTable that all teams are no longer used
+    occupiedCells.forEach(uniqueId => {
+      window.dispatchEvent(new CustomEvent('teamRemoved', { 
+        detail: { uniqueId } 
+      }));
+    });
+
+    // Notify DurationControl that panel table is empty
+    window.dispatchEvent(new CustomEvent('panelTableUpdated'));
+  };
+
   const clearSelection = () => {
     setSelectedCells(new Set());
   };
@@ -347,7 +407,12 @@ export const PanelTable = () => {
 
       if (response.ok) {
         console.log('Panel data saved successfully');
-        // You can add a success notification here
+        // Show success notification
+        setShowSaveSuccess(true);
+        setTimeout(() => setShowSaveSuccess(false), 3000);
+        
+        // Notify DurationControl that panel table has data
+        window.dispatchEvent(new CustomEvent('panelTableUpdated'));
       } else {
         console.error('Failed to save panel data');
       }
@@ -374,11 +439,28 @@ export const PanelTable = () => {
         <div className="ps-section-title" style={{ flexShrink: 0 }}>PANEL TABLE</div>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
           <button 
-            className="ps-button primary"
+            className={`ps-button ${showSaveSuccess ? 'success' : 'primary'}`}
             onClick={savePanels}
-            style={{ fontSize: '10px', padding: '4px 8px' }}
+            style={{ 
+              fontSize: '10px', 
+              padding: '4px 8px',
+              background: showSaveSuccess ? '#28a745' : undefined,
+              color: showSaveSuccess ? 'white' : undefined
+            }}
           >
-            SAVE
+            {showSaveSuccess ? '✓ SAVED' : 'SAVE'}
+          </button>
+          <button 
+            className="ps-button"
+            onClick={deleteAllCells}
+            style={{ 
+              fontSize: '10px', 
+              padding: '4px 8px',
+              background: 'var(--error)',
+              color: 'white'
+            }}
+          >
+            Delete All
           </button>
           <button 
             className={`ps-button ${selectMode ? 'primary' : ''}`}
