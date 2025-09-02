@@ -42,7 +42,27 @@ export const TeamTable = () => {
       }
       
       setTeamTable(newTable);
+      
+      // Fetch existing panels to mark teams as used
+      await fetchPanels();
+      
       setLoading(false);
+    };
+
+    const fetchPanels = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/panels' || 'https://panel-splitter-1.onrender.com/api/panels');
+        if (response.ok) {
+          const panelsData = await response.json();
+          
+          if (panelsData && panelsData.length > 0) {
+            const usedTeamIds = panelsData.map(panel => `${panel.teamsDataId}-${panel.teamId}`);
+            setUsedTeams(usedTeamIds);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching panels:', error);
+      }
     };
 
     fetchTeamData();
@@ -50,7 +70,7 @@ export const TeamTable = () => {
     // Load used teams from localStorage
     const loadUsedTeams = () => {
       const used = JSON.parse(localStorage.getItem('usedTeams') || '[]');
-      setUsedTeams(used);
+      setUsedTeams(prev => [...new Set([...prev, ...used])]);
     };
 
     loadUsedTeams();

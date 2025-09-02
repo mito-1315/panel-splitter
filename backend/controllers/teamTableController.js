@@ -31,7 +31,7 @@ export async function teamsFetcher(req, res) {
             themeName: theme,
             teams: teams.map(team => {
                 return {
-                    uniqueId: team.id,
+                    uniqueId: `${team.id}-${team.teamId}`,
                     teamName: team.teamName,
                     teamId: team.teamId.toString(),
                     problemStatement: team.problemStatementId || ''

@@ -6,6 +6,7 @@ export const PanelTable = () => {
   const [numPanels, setNumPanels] = useState(4);
   const [selectMode, setSelectMode] = useState(false);
   const [selectedCells, setSelectedCells] = useState(new Set());
+  const [duration, setDuration] = useState(10); // Add duration state
 
   const generateTimeSlots = useCallback((startTime, endTime, duration) => {
     const slots = [];
@@ -26,11 +27,60 @@ export const PanelTable = () => {
     return slots;
   }, []);
 
+  const fetchPanels = async (slots) => {
+    try {
+      const response = await fetch('http://localhost:5000/api/panels' || 'https://panel-splitter-1.onrender.com/api/panels');
+      if (response.ok) {
+        const panelsData = await response.json();
+        
+        if (panelsData && panelsData.length > 0) {
+          // Set duration from first panel data
+          setDuration(panelsData[0].duration);
+          
+          // Create new panel table with existing data
+          const newTable = Array.from({ length: slots.length }, () => Array(numPanels).fill(null));
+          const usedTeamIds = [];
+          
+          panelsData.forEach(panel => {
+            const timeIndex = slots.indexOf(panel.time);
+            const panelIndex = panel.panel - 1; // Convert to 0-based index
+            
+            if (timeIndex !== -1 && panelIndex >= 0 && panelIndex < numPanels) {
+              const uniqueId = `${panel.teamsDataId}-${panel.teamId}`;
+              const cellData = {
+                teamName: panel.teamName,
+                uniqueId: uniqueId,
+                teamId: panel.teamId,
+                problemStatementId: panel.problemStatementId,
+                theme: panel.theme
+              };
+              
+              newTable[timeIndex][panelIndex] = cellData;
+              usedTeamIds.push(uniqueId);
+            }
+          });
+          
+          setPanelTable(newTable);
+          
+          // Notify other components about used teams
+          usedTeamIds.forEach(uniqueId => {
+            window.dispatchEvent(new CustomEvent('teamUsed', { 
+              detail: { uniqueId } 
+            }));
+          });
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching panels:', error);
+    }
+  };
+
   const fetchDurationConfig = useCallback(async () => {
     try {
       const response = await fetch('http://localhost:5000/api/duration' || 'https://panel-splitter-1.onrender.com/api/duration');
       if (response.ok) {
         const config = await response.json();
+        setDuration(config.duration); // Store duration for save functionality
         const slots = generateTimeSlots(config.startTime, config.endTime, config.duration);
         setTimeSlots(slots);
         
@@ -44,6 +94,9 @@ export const PanelTable = () => {
           });
           return newTable;
         });
+        
+        // Fetch existing panels after setting up the table structure
+        await fetchPanels(slots);
       }
     } catch (error) {
       console.error('Error fetching duration config:', error);
@@ -59,6 +112,9 @@ export const PanelTable = () => {
         });
         return newTable;
       });
+      
+      // Try to fetch panels with default slots
+      await fetchPanels(defaultSlots);
     }
   }, [numPanels, generateTimeSlots]);
 
@@ -257,6 +313,49 @@ export const PanelTable = () => {
     return collisions;
   };
 
+  const savePanels = async () => {
+    try {
+      const meets = [];
+      
+      // Iterate through all cells in the panel table
+      panelTable.forEach((row, rowIndex) => {
+        row.forEach((cell, colIndex) => {
+          if (cell && cell.uniqueId) {
+            meets.push({
+              time: timeSlots[rowIndex] || '',
+              uniqueId: cell.uniqueId,
+              panel: colIndex + 1
+            });
+          }
+        });
+      });
+      
+      const saveData = {
+        duration: duration,
+        meets: meets
+      };
+
+      console.log('Saving panel data:', saveData);
+
+      const response = await fetch('http://localhost:5000/api/savePanels', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(saveData)
+      });
+
+      if (response.ok) {
+        console.log('Panel data saved successfully');
+        // You can add a success notification here
+      } else {
+        console.error('Failed to save panel data');
+      }
+    } catch (error) {
+      console.error('Error saving panel data:', error);
+    }
+  };
+
   const collisions = detectCollisions();
   const collisionCount = collisions.size;
 
@@ -274,6 +373,13 @@ export const PanelTable = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
         <div className="ps-section-title" style={{ flexShrink: 0 }}>PANEL TABLE</div>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          <button 
+            className="ps-button primary"
+            onClick={savePanels}
+            style={{ fontSize: '10px', padding: '4px 8px' }}
+          >
+            SAVE
+          </button>
           <button 
             className={`ps-button ${selectMode ? 'primary' : ''}`}
             onClick={() => {

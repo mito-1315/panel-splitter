@@ -1,9 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export const DurationControl = () => {
   const [startTime, setStartTime] = useState('08:00');
   const [endTime, setEndTime] = useState('17:00');
   const [duration, setDuration] = useState(10);
+
+  useEffect(() => {
+    const fetchDurationConfig = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/duration' || 'https://panel-splitter-1.onrender.com/api/duration');
+        if (response.ok) {
+          const config = await response.json();
+          setStartTime(config.startTime);
+          setEndTime(config.endTime);
+          setDuration(config.duration);
+        }
+      } catch (error) {
+        console.error('Error fetching duration config:', error);
+      }
+    };
+
+    const fetchPanelDuration = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/panels' || 'https://panel-splitter-1.onrender.com/api/panels');
+        if (response.ok) {
+          const panelsData = await response.json();
+          if (panelsData && panelsData.length > 0) {
+            setDuration(panelsData[0].duration);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching panels:', error);
+      }
+    };
+
+    fetchDurationConfig();
+    fetchPanelDuration();
+  }, []);
 
   const handleSubmit = async () => {
     try {
