@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { PORT } from '../constants/port.js';
 
 export const PanelTable = () => {
   const [panelTable, setPanelTable] = useState([]);
@@ -30,7 +31,7 @@ export const PanelTable = () => {
 
   const fetchPanels = async (slots) => {
     try {
-      const response = await fetch('http://localhost:5000/api/panels' || 'https://panel-splitter-1.onrender.com/api/panels');
+      const response = await fetch(`http://localhost:${PORT}/api/panels` || 'https://panel-splitter-1.onrender.com/api/panels');
       if (response.ok) {
         const panelsData = await response.json();
         
@@ -84,7 +85,7 @@ export const PanelTable = () => {
 
   const fetchDurationConfig = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/duration' || 'https://panel-splitter-1.onrender.com/api/duration');
+      const response = await fetch(`http://localhost:${PORT}/api/duration` || 'https://panel-splitter-1.onrender.com/api/duration');
       if (response.ok) {
         const config = await response.json();
         setDuration(config.duration); // Store duration for save functionality
@@ -397,7 +398,7 @@ export const PanelTable = () => {
 
       console.log('Saving panel data:', saveData);
 
-      const response = await fetch('http://localhost:5000/api/savePanels', {
+      const response = await fetch(`http://localhost:${PORT}/api/savePanels`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

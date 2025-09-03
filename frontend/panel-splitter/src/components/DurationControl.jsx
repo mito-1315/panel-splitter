@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { PORT } from '../constants/port.js';
 
 export const DurationControl = () => {
   const [startTime, setStartTime] = useState('08:00');
@@ -9,7 +10,7 @@ export const DurationControl = () => {
   useEffect(() => {
     const fetchDurationConfig = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/duration' || 'https://panel-splitter-1.onrender.com/api/duration');
+        const response = await fetch(`http://localhost:${PORT}/api/duration` || 'https://panel-splitter-1.onrender.com/api/duration');
         if (response.ok) {
           const config = await response.json();
           setStartTime(config.startTime);
@@ -23,7 +24,7 @@ export const DurationControl = () => {
 
     const fetchPanelDuration = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/panels' || 'https://panel-splitter-1.onrender.com/api/panels');
+        const response = await fetch(`http://localhost:${PORT}/api/panels` || 'https://panel-splitter-1.onrender.com/api/panels');
         if (response.ok) {
           const panelsData = await response.json();
           if (panelsData && panelsData.length > 0) {
@@ -55,7 +56,7 @@ export const DurationControl = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/duration' || 'https://panel-splitter-1.onrender.com/api/duration', {
+      const response = await fetch(`http://localhost:${PORT}/api/duration` || 'https://panel-splitter-1.onrender.com/api/duration', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

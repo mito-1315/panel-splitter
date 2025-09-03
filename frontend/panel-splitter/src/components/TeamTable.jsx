@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { themeNames } from '../constants/themes';
+import { PORT } from '../constants/port.js';
 
 export const TeamTable = () => {
   const [teamTable, setTeamTable] = useState(
@@ -17,7 +18,7 @@ export const TeamTable = () => {
       for (let themeIndex = 0; themeIndex < themeNames.length; themeIndex++) {
         const themeName = themeNames[themeIndex];
         try {
-          const response = await fetch(`http://localhost:5000/api/team/${encodeURIComponent(themeName)}` || `https://panel-splitter-1.onrender.com/api/team/${encodeURIComponent(themeName)}`);
+          const response = await fetch(`http://localhost:${PORT}/api/team/${encodeURIComponent(themeName)}` || `https://panel-splitter-1.onrender.com/api/team/${encodeURIComponent(themeName)}`);
           if (response.ok) {
             const contentType = response.headers.get('content-type');
             if (contentType && contentType.includes('application/json')) {
@@ -51,7 +52,7 @@ export const TeamTable = () => {
 
     const fetchPanels = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/panels' || 'https://panel-splitter-1.onrender.com/api/panels');
+        const response = await fetch(`http://localhost:${PORT}/api/panels` || 'https://panel-splitter-1.onrender.com/api/panels');
         if (response.ok) {
           const panelsData = await response.json();
           
