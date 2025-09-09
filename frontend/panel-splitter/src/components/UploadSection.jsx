@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { PORT } from '../constants/port.js';
 
 export const UploadSection = () => {
   const inputRef = useRef(null);
@@ -34,7 +35,7 @@ export const UploadSection = () => {
         formData.append('file', file);
         
         // Make a POST request to the backend at port 5000
-        const response = await fetch('http://localhost:5000/upload' || 'https://panel-splitter-1.onrender.com/upload', {
+        const response = await fetch(`http://localhost:${PORT}/upload` || 'https://panel-splitter-1.onrender.com/upload', {
           method: 'POST',
           body: formData,
         });
