@@ -1,18 +1,19 @@
 export const themeNames = [
-  'MedTech / BioTech / HealthTech',
-  'Travel & Tourism',
-  'Transportation & Logistics',
-  'Agriculture',
-  'Disaster Management',
-  'Smart Education',
-  'Clean & Green Technology',
-  'Smart Automation',
+  'Agriculture, FoodTech & Rural Development',
   'Blockchain & Cybersecurity',
+  'Clean & Green Technology',
+  'Disaster Management',
+  'Fitness & Sports',
+  'Heritage & Culture',
+  'MedTech / BioTech / HealthTech',
   'Miscellaneous',
   'Renewable / Sustainable Energy',
   'Robotics and Drones',
-  'Heritage & Culture',
-  'Fitness & Sports'
+  'Smart Automation',
+  'Smart Education',
+  'Smart Vehicles',
+  'Space Technology',
+  'Toys & Games',
+  'Transportation & Logistics',
+  'Travel & Tourism',
 ];
-
-
