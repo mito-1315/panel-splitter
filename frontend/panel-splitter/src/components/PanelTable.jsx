@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { PORT } from '../constants/port.js';
+import { PanelAutomation } from './PanelAutomation.jsx';
 
 export const PanelTable = () => {
   const [panelTable, setPanelTable] = useState([]);
@@ -9,6 +10,7 @@ export const PanelTable = () => {
   const [selectedCells, setSelectedCells] = useState(new Set());
   const [duration, setDuration] = useState(10); // Add duration state
   const [showSaveSuccess, setShowSaveSuccess] = useState(false);
+  const [showAutomationModal, setShowAutomationModal] = useState(false);
 
   const generateTimeSlots = useCallback((startTime, endTime, duration) => {
     const slots = [];
@@ -147,18 +149,26 @@ export const PanelTable = () => {
     };
 
     const handleDeleteAllCells = () => {
-      // Use the same functionality as the Delete All button
+    // Use the same functionality as the Delete All button
       deleteAllCells();
+    };
+
+    const handleAutomationComplete = async () => {
+      // Refresh panel data after automation
+      const slots = generateTimeSlots('09:00', '17:00', duration);
+      await fetchPanels(slots);
     };
 
     window.addEventListener('durationUpdated', handleDurationUpdate);
     window.addEventListener('clearAllPanels', handleClearAllPanels);
     window.addEventListener('deleteAllCells', handleDeleteAllCells);
+    window.addEventListener('automationComplete', handleAutomationComplete);
 
     return () => {
       window.removeEventListener('durationUpdated', handleDurationUpdate);
       window.removeEventListener('clearAllPanels', handleClearAllPanels);
       window.removeEventListener('deleteAllCells', handleDeleteAllCells);
+      window.removeEventListener('automationComplete', handleAutomationComplete);
     };
   }, [fetchDurationConfig, timeSlots.length, numPanels]);
 
@@ -453,6 +463,18 @@ export const PanelTable = () => {
           </button>
           <button 
             className="ps-button"
+            onClick={() => setShowAutomationModal(true)}
+            style={{ 
+              fontSize: '10px', 
+              padding: '4px 8px',
+              background: '#28a745',
+              color: 'white'
+            }}
+          >
+            🤖 AUTO
+          </button>
+          <button 
+            className="ps-button"
             onClick={deleteAllCells}
             style={{ 
               fontSize: '10px', 
@@ -598,6 +620,17 @@ export const PanelTable = () => {
           </tbody>
         </table>
       </div>
+      
+      {/* Panel Automation Modal */}
+      <PanelAutomation 
+        showModal={showAutomationModal}
+        setShowModal={setShowAutomationModal}
+        onAutomationComplete={() => {
+          // Refresh panel data after automation
+          const slots = generateTimeSlots('09:00', '17:00', duration);
+          fetchPanels(slots);
+        }}
+      />
     </div>
   );
 };
