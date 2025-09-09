@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { themeNames } from '../constants/themes';
+import { PORT } from '../constants/port.js';
 
 export const TeamTable = () => {
   const [teamTable, setTeamTable] = useState(
@@ -17,7 +18,7 @@ export const TeamTable = () => {
       for (let themeIndex = 0; themeIndex < themeNames.length; themeIndex++) {
         const themeName = themeNames[themeIndex];
         try {
-          const response = await fetch(`http://localhost:5000/api/team/${encodeURIComponent(themeName)}` || `https://panel-splitter-1.onrender.com/api/team/${encodeURIComponent(themeName)}`);
+          const response = await fetch(`http://localhost:${PORT}/api/team/${encodeURIComponent(themeName)}` || `https://panel-splitter-1.onrender.com/api/team/${encodeURIComponent(themeName)}`);
           if (response.ok) {
             const contentType = response.headers.get('content-type');
             if (contentType && contentType.includes('application/json')) {
@@ -42,15 +43,36 @@ export const TeamTable = () => {
       }
       
       setTeamTable(newTable);
+      
+      // Fetch existing panels to mark teams as used - only on initial load
+      await fetchPanels();
+      
       setLoading(false);
     };
 
+    const fetchPanels = async () => {
+      try {
+        const response = await fetch(`http://localhost:${PORT}/api/panels` || 'https://panel-splitter-1.onrender.com/api/panels');
+        if (response.ok) {
+          const panelsData = await response.json();
+          
+          if (panelsData && panelsData.length > 0) {
+            const usedTeamIds = panelsData.map(panel => `${panel.teamsDataId}-${panel.teamId}`);
+            setUsedTeams(usedTeamIds);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching panels:', error);
+      }
+    };
+
+    // Only fetch on initial component mount
     fetchTeamData();
 
     // Load used teams from localStorage
     const loadUsedTeams = () => {
       const used = JSON.parse(localStorage.getItem('usedTeams') || '[]');
-      setUsedTeams(used);
+      setUsedTeams(prev => [...new Set([...prev, ...used])]);
     };
 
     loadUsedTeams();
@@ -64,12 +86,19 @@ export const TeamTable = () => {
       setUsedTeams(prev => prev.filter(id => id !== e.detail.uniqueId));
     };
 
+    const handleClearAllPanels = () => {
+      setUsedTeams([]);
+      localStorage.removeItem('usedTeams');
+    };
+
     window.addEventListener('teamUsed', handleTeamUsed);
     window.addEventListener('teamRemoved', handleTeamRemoved);
+    window.addEventListener('clearAllPanels', handleClearAllPanels);
 
     return () => {
       window.removeEventListener('teamUsed', handleTeamUsed);
       window.removeEventListener('teamRemoved', handleTeamRemoved);
+      window.removeEventListener('clearAllPanels', handleClearAllPanels);
     };
   }, []);
 
@@ -90,6 +119,10 @@ export const TeamTable = () => {
 
   const handleCellClick = (row, col) => {
     if (!selectMode || !teamTable[row][col]) return;
+    
+    // Don't allow selection of cells that are in use
+    const cell = teamTable[row][col];
+    if (usedTeams.includes(cell.uniqueId)) return;
     
     const cellKey = `${row}-${col}`;
     const newSelectedCells = new Set(selectedCells);
@@ -115,6 +148,12 @@ export const TeamTable = () => {
       type: 'column',
       content: selectedTeams
     }));
+    
+    // Auto-unselect after drag starts
+    setTimeout(() => {
+      setSelectedCells(new Set());
+      setSelectMode(false);
+    }, 100);
   };
 
   const clearSelection = () => {
@@ -144,8 +183,8 @@ export const TeamTable = () => {
       overflow: 'hidden'
     }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-        <div className="ps-section-title" style={{ flexShrink: 0 }}>TEAM TABLE</div>
-        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div className="ps-section-title" style={{ flexShrink: 0 }}>TEAM TABLE</div>
           <button 
             className={`ps-button ${selectMode ? 'primary' : ''}`}
             onClick={() => {
@@ -215,7 +254,7 @@ export const TeamTable = () => {
                         fontSize: '12px', 
                         padding: '8px',
                         opacity: isUsed ? 0.5 : 1,
-                        cursor: selectMode ? 'pointer' : (isUsed ? 'not-allowed' : (cell ? 'grab' : 'default')),
+                        cursor: selectMode ? (isUsed ? 'not-allowed' : 'pointer') : (isUsed ? 'not-allowed' : (cell ? 'grab' : 'default')),
                         backgroundColor: isSelected ? 'var(--accent)' : 'transparent',
                         border: isSelected ? '2px solid var(--accent-hover)' : '1px solid var(--border)'
                       }}

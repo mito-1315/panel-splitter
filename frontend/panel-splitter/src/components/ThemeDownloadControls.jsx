@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { themeNames } from '../constants/themes';
+import { PORT } from '../constants/port.js';
 
 export const ThemeDownloadControls = () => {
   const [selectedTheme, setSelectedTheme] = useState(themeNames[0]);
 
   const handleDownloadTheme = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/download/${encodeURIComponent(selectedTheme)}` || `https://panel-splitter-1.onrender.com/api/download/${encodeURIComponent(selectedTheme)}`);
+      const res = await fetch(`http://localhost:${PORT}/api/download/${encodeURIComponent(selectedTheme)}` || `https://panel-splitter-1.onrender.com/api/download/${encodeURIComponent(selectedTheme)}`);
       if (!res.ok) throw new Error('Download failed');
       const blob = await res.blob();
       console.log(blob)
@@ -25,7 +26,7 @@ export const ThemeDownloadControls = () => {
 
   const handleDownloadAll = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/bro/all`  || `https://panel-splitter-1.onrender.com/api/bro/all`);
+      const res = await fetch(`http://localhost:${PORT}/api/bro/all`  || `https://panel-splitter-1.onrender.com/api/bro/all`);
       if (!res.ok) throw new Error('Download failed');
       const blob = await res.blob();
       console.log(blob)
