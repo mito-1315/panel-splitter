@@ -12,7 +12,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 // Enable CORS for frontend requests
 app.use(cors());
@@ -82,6 +82,7 @@ import themeDisplayRoute from './routes/themeDisplayRoute.js'; // Add this line
 import downloadRoute from './routes/downloadRoute.js';
 import teamTableRoute from './routes/teamTableRoute.js';
 import panelTableRoute from './routes/panelTableRoute.js';
+import panelDownloadRoute from './routes/panelDownloadRoute.js';
 
 // Use routes
 app.use('/', uploadRoute);
@@ -90,6 +91,7 @@ app.use('/api', themeDisplayRoute); // Mount themeDisplayRoute under /api
 app.use('/api', downloadRoute);
 app.use('/api', teamTableRoute); // Fix spacing issue here
 app.use('/api',panelTableRoute)
+app.use('/api', panelDownloadRoute);
 
 // Start server
 app.listen(PORT, () => {
